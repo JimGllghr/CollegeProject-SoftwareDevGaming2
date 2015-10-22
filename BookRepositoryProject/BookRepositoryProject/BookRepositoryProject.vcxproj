@@ -69,10 +69,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Admin.cpp" />
     <ClCompile Include="book.cpp" />
+    <ClCompile Include="GuestUser.cpp" />
+    <ClCompile Include="RegisteredUser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Admin.h" />
     <ClInclude Include="Book.h" />
+    <ClInclude Include="GuestUser.h" />
+    <ClInclude Include="RegisteredUser.h" />
+    <ClInclude Include="User.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
