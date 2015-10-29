@@ -1,4 +1,4 @@
-#include "book.h";
+/**#include "book.h";
 
 void book::setAuthor(std::string nAuthor)
 {
@@ -57,4 +57,4 @@ void book::setAuthor(std::string nAuthor, std::string nTitle, unsigned int nISBN
 	ISBN = nISBN;
 	next = nextParam;
 	prev = prevParam;
-}
+}**/

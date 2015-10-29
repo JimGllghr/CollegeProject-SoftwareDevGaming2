@@ -1,7 +1,6 @@
-#ifndef nbook
+/**#ifndef nbook
 #define nbook
 #include <string>
-
 #include <iostream>
 
 class book
@@ -32,4 +31,4 @@ private:
 	book* prev;
 };
 
-#endif
+#endif**/

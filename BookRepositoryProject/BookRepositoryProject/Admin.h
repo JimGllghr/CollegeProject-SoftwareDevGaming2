@@ -1,18 +1,23 @@
 #ifndef nAdmin
 #define nAdmin
 #include <string>
+#include "User.h"
 
 #include <iostream>
 
-class Admin
+class Admin : public user
 {
 public:
-	void setName(std::string nName);
+	void setNext(user* nextParam);
+	void setPrev(user* prevParam);
 
-	std::string getName();
+	GuestUser* getNext() const;
+	GuestUser* getPrev() const;
 
 private:
-	std::string name;
-};
+	unsigned int id;
 
+	GuestUser* next;
+	GuestUser* prev;
+};
 #endif

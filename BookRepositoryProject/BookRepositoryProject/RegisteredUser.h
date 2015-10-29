@@ -1,18 +1,26 @@
 #ifndef nRegisteredUser
 #define nRegisteredUser
 #include <string>
+#include "User.h"
 
 #include <iostream>
 
-class RegisteredUser
+class RegisteredUser : public user
 {
 public:
-	void setName(std::string nName);
+	RegisteredUser(std::string nName, std::string nPassword, unsigned int nID);
 
-	std::string getName();
+	void setNext(RegisteredUser* nextParam);
+	void setPrev(RegisteredUser* prevParam);
+
+	RegisteredUser* getNext() const;
+	RegisteredUser* getPrev() const;
 
 private:
-	std::string name;
+	unsigned int id;
+
+	RegisteredUser* next;
+	RegisteredUser* prev;
 };
 
 #endif

@@ -1,27 +1,27 @@
-#ifndef nGuestUser
-#define nGuestUser
+#ifndef nuser
+#define nuser
 #include <string>
 
 #include <iostream>
 
-class GuestUser
+class user
 {
 public:
-	void setID(unsigned int nID);
+	user(std::string nName, std::string nPassword, unsigned int nID);
+	std::string getName();
+	void setName(std::string nName);
 
+	std::string getPassword();
+	void setPassword(std::string nName);
+
+	void setID(unsigned int nID);
 	unsigned int getID();
 
-	void setNext(GuestUser* nextParam);
-	void setPrev(GuestUser* prevParam);
-
-	GuestUser* getNext() const;
-	GuestUser* getPrev() const;
-
 private:
-	unsigned int id;
-
-	GuestUser* next;
-	GuestUser* prev;
+	std::string name;
+	std::string password;
+	unsigned int ID;
 };
+
 
 #endif
