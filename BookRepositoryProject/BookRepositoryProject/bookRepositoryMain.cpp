@@ -11,7 +11,7 @@ int currentGuestUser;
 int adminCounter;
 int currentAdmin;
 
-RegisteredUser* Regnext;
+RegisteredUser* RegFirst;
 RegisteredUser* RegPrev;
 user* GuestNext;
 user* GuestPrev;
@@ -20,35 +20,61 @@ user* AdminPrev;
 
 void registerNewUser(std::string nName, std::string password, unsigned int ID)
 {
-	RegisteredUser registeredNewUser(nName, password, ID);
+	RegisteredUser* registeredNewUser = new RegisteredUser(nName, password, ID);
 	if (RegUserCounter > 0)
 	{	
 		std::cout << "Prev Set";
-		registeredNewUser.setPrev(RegPrev);
-		(RegPrev)->setNext(&registeredNewUser);
+		(registeredNewUser)->setPrev(RegPrev);
+		(RegPrev)->setNext(registeredNewUser);
+	}
+	else
+	{
+		RegFirst = registeredNewUser;
 	}
 	currentRegUser++;
 	RegUserCounter++;
-	RegPrev = &registeredNewUser;
+	RegPrev = registeredNewUser;
 }
 
-void ResetRegisteredUsers()
+void DeleteRegUserName(std::string nName)
 {
-	while (RegUserCounter < currentRegUser)
+	int deletedUsers = 0;
+	RegPrev = RegFirst;
+	for (int x = 1; x <= RegUserCounter; x++)
 	{
-		currentRegUser++;
-		RegPrev = (RegPrev)->getNext();
-		Regnext = (RegPrev)->getNext();
+		if ((RegPrev)->getName() == nName)
+		{
+			if (x == 1)
+			{
+				RegFirst = (RegFirst)->getNext();
+			}
+			(RegPrev)->getPrev()->setNext((RegPrev)->getNext());
+			RegisteredUser* tempPtr = (RegFirst)->getNext();
+			delete RegPrev;
+			RegisteredUser* RegPrev = tempPtr;
+			delete tempPtr;
+			deletedUsers += 1;
+		}
+		if (x <= RegUserCounter)
+		{
+			RegPrev = (RegPrev)->getNext();
+		}
 	}
+	std::cout <<"Registered Users Deleted: "<< deletedUsers;
+	RegUserCounter -= deletedUsers;
 }
 
 void printRegisteredUsers()
 {
-	//ResetRegisteredUsers();
+	RegPrev = RegFirst;
 	std::cout << "Registered Users\n\n";
-	while (currentRegUser>0)
+	for (int x = 1; x <= RegUserCounter; x++)
 	{
-		std::cout << (RegPrev)->getName() << "\n";
+		std::cout << "Name: "<<(RegPrev)->getName() <<" - ID: "<< (RegPrev)->getID()<< "\n";
+		if (x <= RegUserCounter)
+		{
+			RegPrev = (RegPrev)->getNext();
+		}
 	}
 }
 int main()
@@ -61,8 +87,15 @@ int main()
 	currentGuestUser = 0;
 
 	registerNewUser("James", "Sandwich", 12223);
-	registerNewUser("sam", "blueberry", 12223);
+	registerNewUser("Clara", "blueberry", 12223);
+	registerNewUser("Rory", "qwerty", 12223);
+	registerNewUser("Amy", "qwerty", 12223);
+	registerNewUser("Amy", "qwerty", 12223);
 
 	printRegisteredUsers();
+	DeleteRegUserName("Amy");
+	printRegisteredUsers();
+
+	system("pause");
 }
 
