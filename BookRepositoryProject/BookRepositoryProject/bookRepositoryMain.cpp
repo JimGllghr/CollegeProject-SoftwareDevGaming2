@@ -23,7 +23,6 @@ void registerNewUser(std::string nName, std::string password, unsigned int ID)
 	RegisteredUser* registeredNewUser = new RegisteredUser(nName, password, ID);
 	if (RegUserCounter > 0)
 	{	
-		std::cout << "Prev Set";
 		(registeredNewUser)->setPrev(RegPrev);
 		(RegPrev)->setNext(registeredNewUser);
 	}
@@ -42,16 +41,16 @@ void DeleteRegUserName(std::string nName)
 	RegPrev = RegFirst;
 	for (int x = 1; x <= RegUserCounter; x++)
 	{
-		if ((RegPrev)->getName() == nName)
+		if (((RegPrev)->getName()) == nName)
 		{
 			if (x == 1)
 			{
 				RegFirst = (RegFirst)->getNext();
 			}
-			(RegPrev)->getPrev()->setNext((RegPrev)->getNext());
-			RegisteredUser* tempPtr = (RegFirst)->getNext();
-			delete RegPrev;
-			RegisteredUser* RegPrev = tempPtr;
+			((RegPrev)->getPrev())->setNext((RegPrev)->getNext());
+			((RegPrev)->getNext())->setPrev((RegPrev)->getPrev());
+			RegisteredUser* tempPtr = RegPrev;
+			RegPrev = (RegPrev)->getPrev();
 			delete tempPtr;
 			deletedUsers += 1;
 		}
@@ -88,9 +87,10 @@ int main()
 
 	registerNewUser("James", "Sandwich", 12223);
 	registerNewUser("Clara", "blueberry", 12223);
+	registerNewUser("Amy", "qwerty", 12223);
+	registerNewUser("Clara", "blueberry", 12223);
+	registerNewUser("Amy", "qwerty", 12223);
 	registerNewUser("Rory", "qwerty", 12223);
-	registerNewUser("Amy", "qwerty", 12223);
-	registerNewUser("Amy", "qwerty", 12223);
 
 	printRegisteredUsers();
 	DeleteRegUserName("Amy");
