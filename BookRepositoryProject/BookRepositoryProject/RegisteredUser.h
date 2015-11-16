@@ -17,7 +17,6 @@ public:
 	RegisteredUser* getPrev() const;
 
 private:
-	unsigned int id;
 
 	RegisteredUser* next;
 	RegisteredUser* prev;

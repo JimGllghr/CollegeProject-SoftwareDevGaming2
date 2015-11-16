@@ -8,16 +8,18 @@
 class Admin : public user
 {
 public:
-	void setNext(user* nextParam);
-	void setPrev(user* prevParam);
+	Admin(std::string nName, std::string nPassword, unsigned int nID);
 
-	GuestUser* getNext() const;
-	GuestUser* getPrev() const;
+	void setNext(Admin* nextParam);
+	void setPrev(Admin* prevParam);
+
+	Admin* getNext() const;
+	Admin* getPrev() const;
 
 private:
 	unsigned int id;
 
-	GuestUser* next;
-	GuestUser* prev;
+	Admin* next;
+	Admin* prev;
 };
 #endif

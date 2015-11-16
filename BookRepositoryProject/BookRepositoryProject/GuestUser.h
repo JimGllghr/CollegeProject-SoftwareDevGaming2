@@ -10,17 +10,15 @@ class GuestUser : public user
 public:
 	void setID(unsigned int nID);
 
-	unsigned int getID();
+	GuestUser(std::string nName, std::string nPassword, unsigned int nID);
 
-	void setNext(user* nextParam);
-	void setPrev(user* prevParam);
+	void setNext(GuestUser* nextParam);
+	void setPrev(GuestUser* prevParam);
 
 	GuestUser* getNext() const;
 	GuestUser* getPrev() const;
 
 private:
-	unsigned int id;
-
 	GuestUser* next;
 	GuestUser* prev;
 };

@@ -1,4 +1,4 @@
-﻿Build started 14/11/2015 14:29:51.
+﻿Build started 16/11/2015 17:14:24.
      1>Project "C:\Users\James\Documents\Software.cpp\BookRepositoryProject\BookRepositoryProject\BookRepositoryProject.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\\" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Facades\\" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\mscorlib.dll" /analyze- /errorReport:prompt /clr:nostdlib bookRepositoryMain.cpp
@@ -16,4 +16,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.48
+Time Elapsed 00:00:04.63
