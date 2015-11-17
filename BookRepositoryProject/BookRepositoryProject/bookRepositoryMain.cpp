@@ -21,6 +21,10 @@ GuestUser* GuestPrev;
 RegisteredUser* RegFirst;
 RegisteredUser* RegPrev;
 
+Admin* admin;
+GuestUser* Guest;
+RegisteredUser* Reg;
+
 void registerNewUser(std::string nName, std::string password, unsigned int ID)
 {
 	RegisteredUser* registeredNewUser = new RegisteredUser(nName, password, ID);
@@ -92,7 +96,19 @@ void printRegisteredUsers()
 	for (int x = 1; x <= RegUserCounter; x++)
 	{
 		std::cout << RegPrev;
-		if (x <= RegUserCounter)
+		if (x < RegUserCounter)
+		{
+			RegPrev = (RegPrev)->getNext();
+		}
+	}
+}
+
+void resetRegisteredUsers()
+{
+	RegPrev = RegFirst;
+	for (int x = 1; x <= RegUserCounter; x++)
+	{
+		if (x < RegUserCounter)
 		{
 			RegPrev = (RegPrev)->getNext();
 		}
@@ -120,7 +136,7 @@ void DeleteAdmin(std::string nName)
 {
 	int deletedUsers = 0;
 	adminPrev = adminFirst;
-	for (int x = 1; x <= adminCounter; x++)
+	for (int x = 1; x < adminCounter; x++)
 	{
 		if (((adminPrev)->getName()) == nName)
 		{
@@ -177,6 +193,18 @@ void printAdmins()
 	}
 }
 
+void resetAdmins()
+{
+	adminPrev = adminFirst;
+	for (int x = 1; x <= adminCounter; x++)
+	{
+		if (x < adminCounter)
+		{
+			adminPrev = (adminPrev)->getNext();
+		}
+	}
+}
+
 bool login()
 {
 	RegPrev = RegFirst;
@@ -195,6 +223,7 @@ bool login()
 			{
 				userType = 2;
 				std::cout << "login Successful\n"<< std::endl;
+				Reg = RegPrev;
 				return true;
 			}
 		}
@@ -213,6 +242,7 @@ bool login()
 			{
 				userType = 1;
 				std::cout << "login Successful\n" << std::endl;
+				admin = adminPrev;
 				return true;
 			}
 		}
@@ -236,9 +266,10 @@ int main()
 	currentRegUser = 0;
 	currentGuestUser = 0;
 
-	registerNewUser("james", "sandwich", 12223);
-	registerNewUser("Clara", "blueberry", 12223);
+	registerNewUser("james", "sandwich", 26622);
+	registerNewUser("Clara", "blueberry", 12233);
 	registerNewUser("Amy", "qwerty", 12223);
+
 	registerNewUser("Clara", "blueberry", 12223);
 	registerNewUser("Amy", "qwerty", 12223);
 	registerNewUser("James", "Sandwich", 12223);
@@ -262,7 +293,9 @@ int main()
 		}
 		while (userType == 1)
 		{
-			std::cout << "\nAdmin Options \n(1) Log out \n(2) Delete Admin \n(3) Add Admin\n(4) Print Admins \n(5) Delete Registered User \n(6) Register user \n(7) Print Registered users";
+			resetAdmins();
+			resetRegisteredUsers();
+			std::cout << "\nAdmin Options \n(1) Log out \n(2) Delete Admin \n(3) Add Admin\n(4) Print Admins \n(5) Delete Registered User \n(6) Register user \n(7) Print Registered users \n(8) View my Details";
 			std::cout << std::endl <<"Please enter desired option: ";
 			int input;
 			std::cin >> input;
@@ -317,9 +350,34 @@ int main()
 			{
 				printRegisteredUsers();
 			}
+			
+			if (input == 8)
+			{
+				std::cout << admin; 
+			}
+		}
+		
+		while (userType == 2)
+		{
+			
+			resetAdmins();
+			resetRegisteredUsers();
+			std::cout << "\nRegistered Users Options \n(1) Log out \n(2) print user Details";
+			std::cout << std::endl <<"Please enter desired option: ";
+			int input;
+			std::cin >> input;
+			if (input == 1)
+			{
+				userType = 0;
+				loggedIn = false;
+			}
+			
+			if (input == 2)
+			{
+				std::cout << Reg; 
+			}
 		}
 	}
 
 	system("pause");
 }
-

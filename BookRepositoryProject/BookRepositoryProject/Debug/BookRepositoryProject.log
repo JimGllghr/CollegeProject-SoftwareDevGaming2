@@ -1,19 +1,19 @@
-﻿Build started 17/11/2015 12:32:15.
-     1>Project "C:\Users\James\Documents\Software.cpp\BookRepositoryProject\BookRepositoryProject\BookRepositoryProject.vcxproj" on node 2 (Build target(s)).
+﻿Build started 17/11/2015 14:56:50.
+     1>Project "C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\BookRepositoryProject\BookRepositoryProject.vcxproj" on node 2 (Build target(s)).
+       Project file contains ToolsVersion="14.0". This toolset is unknown or missing. You may be able to resolve this by installing the appropriate .NET Framework for this toolset. Treating the project as if it had ToolsVersion="4.0".
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\\" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Facades\\" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\mscorlib.dll" /analyze- /errorReport:prompt /clr:nostdlib bookRepositoryMain.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt bookRepositoryMain.cpp
          bookRepositoryMain.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\James\Documents\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\James\Documents\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.pdb" /ASSEMBLYDEBUG /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Debug\Admin.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.lib" /MACHINE:X86 Debug\Admin.obj
          Debug\book.obj
          Debug\bookRepositoryMain.obj
          Debug\GuestUser.obj
          Debug\RegisteredUser.obj
          Debug\User.obj
-         "Debug\.NETFramework,Version=v4.5.2.AssemblyAttributes.obj"
-         BookRepositoryProject.vcxproj -> C:\Users\James\Documents\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.exe
-     1>Done Building Project "C:\Users\James\Documents\Software.cpp\BookRepositoryProject\BookRepositoryProject\BookRepositoryProject.vcxproj" (Build target(s)).
+         BookRepositoryProject.vcxproj -> C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.exe
+     1>Done Building Project "C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\BookRepositoryProject\BookRepositoryProject.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:06.16
+Time Elapsed 00:00:00.92
