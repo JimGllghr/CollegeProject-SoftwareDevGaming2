@@ -17,7 +17,6 @@ public:
 	Admin* getPrev() const;
 
 private:
-	unsigned int id;
 
 	Admin* next;
 	Admin* prev;
