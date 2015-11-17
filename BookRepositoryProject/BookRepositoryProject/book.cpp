@@ -1,4 +1,4 @@
-/**#include "book.h";
+#include "book.h";
 
 void book::setAuthor(std::string nAuthor)
 {
@@ -50,11 +50,9 @@ book* book::getPrev() const
 	return prev;
 }
 
-void book::setAuthor(std::string nAuthor, std::string nTitle, unsigned int nISBN, book* nextParam, book* prevParam)
+book::book(std::string nAuthor, std::string nTitle, unsigned int nISBN)
 {
 	author = nAuthor;
 	title = nTitle;
 	ISBN = nISBN;
-	next = nextParam;
-	prev = prevParam;
-}**/
+}

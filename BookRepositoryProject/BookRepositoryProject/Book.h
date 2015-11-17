@@ -1,4 +1,4 @@
-/**#ifndef nbook
+#ifndef nbook
 #define nbook
 #include <string>
 #include <iostream>
@@ -6,12 +6,13 @@
 class book
 {
 public:
+	book(std::string nAuthor, std::string nTitle, unsigned int nISBN);
+
 	std::string getAuthor() const;
 	std::string getTitle() const;
 	unsigned int getISBN() const;
 
-	void setBook(std::string nAuthor, std::string nTitle, unsigned int nISBN, book* nextParam, book* prevParam);
-
+	
 	void setAuthor(std::string nAuthor);
 	void setTitle(std::string ntitle);
 	void setISBN(unsigned int nISBN);
@@ -31,4 +32,4 @@ private:
 	book* prev;
 };
 
-#endif**/
+#endif

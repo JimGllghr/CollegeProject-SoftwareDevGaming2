@@ -3,6 +3,7 @@
 #include "RegisteredUser.h"
 #include "Admin.h"
 #include "bookRepositoryMain.h"
+#include "book.h"
 
 int RegUserCounter;
 int currentRegUser;
@@ -10,6 +11,7 @@ int GuestUserCounter;
 int currentGuestUser;
 int adminCounter;
 int currentAdmin;
+int bookCounter;
 
 int idCount;
 int userType;
@@ -22,6 +24,8 @@ GuestUser* GuestNext;
 GuestUser* GuestPrev;
 RegisteredUser* RegFirst;
 RegisteredUser* RegPrev;
+book* bookFirst;
+book* bookPrev;
 
 Admin* admin;
 GuestUser* Guest;
@@ -207,6 +211,95 @@ void resetAdmins()
 	}
 }
 
+void addBook(std::string nAuthor, std::string nTitle, unsigned int nISBN)
+{
+	book* newBook = new book(nAuthor, nTitle, nISBN);
+	if (bookCounter > 0)
+	{
+		(newBook)->setPrev(bookPrev);
+		(bookPrev)->setNext(newBook);
+	}
+	else
+	{
+		bookFirst = newBook;
+	}
+	bookCounter++;
+	bookPrev = newBook;
+}
+
+void removeBookName(std::string nName)
+{
+	int deletedUsers = 0;
+	bookPrev = bookFirst;
+	for (int x = 1; x <= bookCounter; x++)
+	{
+		if (((bookPrev)->getTitle()) == nName)
+		{
+			if (x == 1)
+			{
+				bookFirst = (bookFirst)->getNext();
+			}
+			else
+			{
+				((bookPrev)->getPrev())->setNext((bookPrev)->getNext());
+			}
+			if (x < (bookCounter - deletedUsers) && x > 1)
+			{
+				((bookPrev)->getNext())->setPrev((bookPrev)->getPrev());
+			}
+			book* tempPtr = bookPrev;
+			if (x != 1)
+			{
+				bookPrev = (bookPrev)->getPrev();
+			}
+			else
+			{
+				bookPrev = (bookPrev)->getNext();;
+			}
+			delete tempPtr;
+			deletedUsers += 1;
+		}
+		if (x <= bookCounter - (deletedUsers+1))
+		{
+			bookPrev = (bookPrev)->getNext();
+		}
+	}
+	std::cout << "books Deleted: " << deletedUsers;
+	bookCounter -= deletedUsers;
+}
+
+std::ostream& operator<<(std::ostream& out, book* Book)
+{
+	std::cout << "\nTitle: " << (Book)->getTitle() << " Author: " << (Book)->getAuthor() << " ISBN: " << (Book)->getISBN() << std::endl;
+	return out;
+}
+
+void printAllBooks()
+{
+	bookPrev = bookFirst;
+	std::cout << "Books\n";
+	for (int x = 1; x <= bookCounter; x++)
+	{
+		std::cout << bookPrev;
+		if (x < bookCounter)
+		{
+			bookPrev = (bookPrev)->getNext();
+		}
+	}
+}
+
+void resetbooks()
+{
+	bookPrev = bookFirst;
+	for (int x = 1; x <= RegUserCounter; x++)
+	{
+		if (x < bookCounter)
+		{
+			bookPrev = (bookPrev)->getNext();
+		}
+	}
+}
+
 bool login()
 {
 	RegPrev = RegFirst;
@@ -362,7 +455,7 @@ void runGuest()
 
 }
 
-int main()
+void initiate()
 {
 	idCount = 10000;
 	RegUserCounter = 0;
@@ -384,10 +477,19 @@ int main()
 	registerNewAdmin("sam", "qwerty", 12443);
 	registerNewAdmin("owen", "qwerty", 15623);
 	registerNewAdmin("admin", "admin", 12323);
+	
+	addBook("The Martian", "Andy Weir", 97808);
+	printAllBooks;
+
 	/**
 	newGuest("Tom", "qwerty", 12223);
 	newGuest("cian", "qwerty", 12223);
 	newGuest("kerry", "qwerty", 12223);**/
+}
+
+int main()
+{
+	initiate();
 
 	bool running = true;
 	while (running)
