@@ -1,22 +1,18 @@
-﻿Build started 17/11/2015 18:31:27.
-     1>Project "C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\BookRepositoryProject\BookRepositoryProject.vcxproj" on node 2 (Build target(s)).
-       Project file contains ToolsVersion="14.0". This toolset is unknown or missing. You may be able to resolve this by installing the appropriate .NET Framework for this toolset. Treating the project as if it had ToolsVersion="4.0".
-     1>Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.lib" /MACHINE:X86 Debug\Admin.obj
+﻿Build started 17/11/2015 18:51:57.
+     1>Project "C:\Users\James\Documents\Software.cpp\BookRepositoryProject\BookRepositoryProject\BookRepositoryProject.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt bookRepositoryMain.cpp
+         bookRepositoryMain.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\James\Documents\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\James\Documents\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\James\Documents\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.lib" /MACHINE:X86 Debug\Admin.obj
          Debug\book.obj
          Debug\bookRepositoryMain.obj
          Debug\GuestUser.obj
          Debug\RegisteredUser.obj
          Debug\User.obj
-     1>book.obj : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in Admin.obj
-     1>bookRepositoryMain.obj : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in Admin.obj
-     1>msvcprtd.lib(MSVCP110D.dll) : error LNK2005: "public: __thiscall std::_Container_base12::_Container_base12(void)" (??0_Container_base12@std@@QAE@XZ) already defined in Admin.obj
-     1>msvcprtd.lib(MSVCP110D.dll) : error LNK2005: "public: __thiscall std::_Container_base12::~_Container_base12(void)" (??1_Container_base12@std@@QAE@XZ) already defined in Admin.obj
-     1>msvcprtd.lib(MSVCP110D.dll) : error LNK2005: "public: void __thiscall std::_Container_base12::_Orphan_all(void)" (?_Orphan_all@_Container_base12@std@@QAEXXZ) already defined in Admin.obj
-     1>msvcprtd.lib(locale0_implib.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in Admin.obj
-     1>C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.exe : fatal error LNK1169: one or more multiply defined symbols found
-     1>Done Building Project "C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\BookRepositoryProject\BookRepositoryProject.vcxproj" (Build target(s)) -- FAILED.
+         BookRepositoryProject.vcxproj -> C:\Users\James\Documents\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.exe
+     1>Done Building Project "C:\Users\James\Documents\Software.cpp\BookRepositoryProject\BookRepositoryProject\BookRepositoryProject.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:00.12
+Time Elapsed 00:00:02.86

@@ -355,7 +355,7 @@ void runAdmin()
 {
 	resetAdmins();
 	resetRegisteredUsers();
-	std::cout << "\nAdmin Options \n(1) Log out \n(2) Delete Admin \n(3) Add Admin\n(4) Print Admins \n(5) Delete Registered User \n(6) Register user \n(7) Print Registered users \n(8) View my Details";
+	std::cout << "\nAdmin Options \n(1) Log out \n(2) Delete Admin \n(3) Add Admin\n(4) Print Admins \n(5) Delete Registered User \n(6) Register user \n(7) Print Registered users \n(8) View my Details \n(9) Print Available books \n(10) Delete Book \n(11) Add Book";
 	std::cout << std::endl << "Please enter desired option: ";
 	int input;
 	std::cin >> input;
@@ -426,14 +426,42 @@ void runAdmin()
 		std::cout << admin;
 		break;
 	}
+	case 9:
+	{
+		printAllBooks();
+		break;
 	}
+	case 10:
+	{
+		std::cout << "please enter name of book to Remove: ";
+		std::string name;
+		std::cin >> name;
+		removeBookName(name);
+		break;
+	}
+	case 11:
+	{
+		std::cout << "please enter title of new book: ";
+		std::string title;
+		std::cin >> title;
+		std::cout << "please enter Author of new book: ";
+		std::string Author;
+		std::cin >> Author;
+		std::cout << "please enter ISBN of new book: ";
+		unsigned int ISBN;
+		std::cin >> ISBN;
+		registerNewAdmin(title, Author, ISBN);
+		std::cout << "book " << title << " has been added\n";
+		break;
+	}
+}
 }
 
 void runRegisteredUser()
 {
 	resetAdmins();
 	resetRegisteredUsers();
-	std::cout << "\nRegistered Users Options \n(1) Log out \n(2) print user Details";
+	std::cout << "\nRegistered Users Options \n(1) Log out \n(2) print user Details \n (3)Print Available books";
 	std::cout << std::endl << "Please enter desired option: ";
 	int input;
 	std::cin >> input;
@@ -446,6 +474,9 @@ void runRegisteredUser()
 		break;
 	case 2:
 		std::cout << Reg;
+		break;
+	case 3:
+		printAllBooks();
 		break;
 	}
 }
@@ -479,7 +510,15 @@ void initiate()
 	registerNewAdmin("admin", "admin", 12323);
 	
 	addBook("The Martian", "Andy Weir", 97808);
-	printAllBooks;
+	addBook("The Hunger Games", "Susan Collins", 23345);
+	addBook("Ready Player one", "Ernest Cline", 65321);
+	addBook("The Martian", "Andy Weir", 97808);
+	addBook("The Martian", "Andy Weir", 97808);
+	addBook("The Martian", "Andy Weir", 97808);
+	addBook("The Martian", "Andy Weir", 97808);
+	addBook("The Martian", "Andy Weir", 97808);
+	addBook("The Martian", "Andy Weir", 97808);
+	addBook("The Martian", "Andy Weir", 97808);
 
 	/**
 	newGuest("Tom", "qwerty", 12223);
