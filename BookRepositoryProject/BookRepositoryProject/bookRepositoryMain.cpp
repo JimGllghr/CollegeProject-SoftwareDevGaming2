@@ -14,6 +14,8 @@ int currentAdmin;
 int idCount;
 int userType;
 
+bool loggedIn;
+
 Admin* adminFirst;
 Admin* adminPrev;
 GuestUser* GuestNext;
@@ -256,6 +258,110 @@ bool login()
 	return false;
 }
 
+void runAdmin()
+{
+	resetAdmins();
+	resetRegisteredUsers();
+	std::cout << "\nAdmin Options \n(1) Log out \n(2) Delete Admin \n(3) Add Admin\n(4) Print Admins \n(5) Delete Registered User \n(6) Register user \n(7) Print Registered users \n(8) View my Details";
+	std::cout << std::endl << "Please enter desired option: ";
+	int input;
+	std::cin >> input;
+
+	switch (input)
+	{
+	case 1:
+	{
+		userType = 0;
+		loggedIn = false;
+		std::cout << "\nLogged out";
+		break;
+	}
+	case 2:
+	{
+		std::cout << "please enter name of admin to Delete: ";
+		std::string name;
+		std::cin >> name;
+		DeleteAdmin(name);
+		break;
+	}
+	case 3:
+	{
+		std::cout << "please enter name of new admin: ";
+		std::string name;
+		std::cin >> name;
+		std::cout << "please enter password of new admin: ";
+		std::string password;
+		std::cin >> password;
+		idCount++;
+		registerNewAdmin(name, password, idCount);
+		std::cout << "Admin " << name << " has been Registered\n";
+		break;
+	}
+	case 4:
+	{
+		printAdmins();
+		break;
+	}
+	case 5:
+	{
+		std::cout << "please enter name of Registered user to Delete: ";
+		std::string name;
+		std::cin >> name;
+		DeleteRegUser(name);
+		break;
+	}
+	case 6:
+	{
+		std::cout << "please enter name of new user: ";
+		std::string name;
+		std::cin >> name;
+		std::cout << "please enter password of new user: ";
+		std::string password;
+		std::cin >> password;
+		idCount++;
+		registerNewUser(name, password, idCount);
+		std::cout << "User " << name << " has been Registered\n";
+		break;
+	}
+	case 7:
+	{
+		printRegisteredUsers();
+		break;
+	}
+	case 8:
+	{
+		std::cout << admin;
+		break;
+	}
+	}
+}
+
+void runRegisteredUser()
+{
+	resetAdmins();
+	resetRegisteredUsers();
+	std::cout << "\nRegistered Users Options \n(1) Log out \n(2) print user Details";
+	std::cout << std::endl << "Please enter desired option: ";
+	int input;
+	std::cin >> input;
+	switch (input) 
+	{
+	case 1:
+		userType = 0;
+		loggedIn = false; 
+		std::cout << "\nLogged out";
+		break;
+	case 2:
+		std::cout << Reg;
+		break;
+	}
+}
+
+void runGuest()
+{
+
+}
+
 int main()
 {
 	idCount = 10000;
@@ -268,16 +374,16 @@ int main()
 
 	registerNewUser("james", "sandwich", 26622);
 	registerNewUser("Clara", "blueberry", 12233);
-	registerNewUser("Amy", "qwerty", 12223);
+	registerNewUser("Amy", "qwerty", 14563);
 
-	registerNewUser("Clara", "blueberry", 12223);
+	registerNewUser("Clara", "blueberry", 17823);
 	registerNewUser("Amy", "qwerty", 12223);
-	registerNewUser("James", "Sandwich", 12223);
+	registerNewUser("James", "Sandwich", 12667);
 
-	registerNewAdmin("jim", "qwerty", 12223);
-	registerNewAdmin("sam", "qwerty", 12223);
-	registerNewAdmin("owen", "qwerty", 12223);
-	registerNewAdmin("admin", "admin", 12223);
+	registerNewAdmin("jim", "qwerty", 12923);
+	registerNewAdmin("sam", "qwerty", 12443);
+	registerNewAdmin("owen", "qwerty", 15623);
+	registerNewAdmin("admin", "admin", 12323);
 	/**
 	newGuest("Tom", "qwerty", 12223);
 	newGuest("cian", "qwerty", 12223);
@@ -286,96 +392,24 @@ int main()
 	bool running = true;
 	while (running)
 	{
-		bool loggedIn = false;
+		loggedIn = false;
 		while (!(loggedIn))
 		{
 			loggedIn = login();
 		}
 		while (userType == 1)
 		{
-			resetAdmins();
-			resetRegisteredUsers();
-			std::cout << "\nAdmin Options \n(1) Log out \n(2) Delete Admin \n(3) Add Admin\n(4) Print Admins \n(5) Delete Registered User \n(6) Register user \n(7) Print Registered users \n(8) View my Details";
-			std::cout << std::endl <<"Please enter desired option: ";
-			int input;
-			std::cin >> input;
-			if (input == 1)
-			{
-				userType = 0;
-				loggedIn = false;
-			}
-			if (input == 2)
-			{
-				std::cout << "please enter name of admin to Delete: ";
-				std::string name;
-				std::cin >> name;
-				DeleteAdmin(name);
-			}
-			if (input == 3)
-			{
-				std::cout << "please enter name of new admin: ";
-				std::string name;
-				std::cin >> name;
-				std::cout << "please enter password of new admin: ";
-				std::string password;
-				std::cin >> password;
-				idCount++;
-				registerNewAdmin(name, password, idCount);
-				std::cout << "Admin " << name << " has been Registered\n";
-			}
-			if (input == 4)
-			{
-				printAdmins();
-			}
-			if (input == 5)
-			{
-				std::cout << "please enter name of Registered user to Delete: ";
-				std::string name;
-				std::cin >> name;
-				DeleteRegUser(name);
-			}
-			if (input == 6)
-			{
-				std::cout << "please enter name of new user: ";
-				std::string name;
-				std::cin >> name;
-				std::cout << "please enter password of new user: ";
-				std::string password;
-				std::cin >> password;
-				idCount++;
-				registerNewUser(name, password, idCount);
-				std::cout << "User " << name << " has been Registered\n";
-			}
-			if (input == 7)
-			{
-				printRegisteredUsers();
-			}
-			
-			if (input == 8)
-			{
-				std::cout << admin; 
-			}
+			runAdmin();
 		}
 		
 		while (userType == 2)
 		{
-			
-			resetAdmins();
-			resetRegisteredUsers();
-			std::cout << "\nRegistered Users Options \n(1) Log out \n(2) print user Details";
-			std::cout << std::endl <<"Please enter desired option: ";
-			int input;
-			std::cin >> input;
-			if (input == 1)
-			{
-				userType = 0;
-				loggedIn = false;
-			}
-			
-			if (input == 2)
-			{
-				std::cout << Reg; 
-			}
+			runRegisteredUser();
+		}
+
+		while (userType == 3)
+		{
+			runGuest();
 		}
 	}
 
