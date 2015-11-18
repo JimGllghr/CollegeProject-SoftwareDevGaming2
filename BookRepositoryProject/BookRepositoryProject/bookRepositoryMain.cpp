@@ -175,7 +175,7 @@ void DeleteAdmin(std::string nName)
 			adminPrev = (adminPrev)->getNext();
 		}
 	}
-	std::cout << "\nAdmins Deleted: " << deletedUsers<<std::endl;
+	std::cout << "\nAdmins Deleted: " << deletedUsers << std::endl;
 	adminCounter -= deletedUsers;
 }
 
@@ -207,6 +207,95 @@ void resetAdmins()
 		if (x < adminCounter)
 		{
 			adminPrev = (adminPrev)->getNext();
+		}
+	}
+}
+
+void registerNewGuest(std::string nName, std::string password, unsigned int ID)
+{
+	GuestUser* registeredNewGuest = new GuestUser(nName, password, ID);
+	if (GuestUserCounter > 0)
+	{
+		(registeredNewGuest)->setPrev(GuestPrev);
+		(GuestPrev)->setNext(registeredNewGuest);
+	}
+	else
+	{
+		GuestNext = registeredNewGuest;
+	}
+	GuestUserCounter++;
+	GuestPrev = registeredNewGuest;
+}
+
+void DeletGuest(std::string nName)
+{
+	int deletedUsers = 0;
+	GuestPrev = GuestNext;
+	for (int x = 1; x < GuestUserCounter; x++)
+	{
+		if (((GuestPrev)->getName()) == nName)
+		{
+			if (x == 1)
+			{
+				GuestNext = (GuestNext)->getNext();
+			}
+			else
+			{
+				((GuestPrev)->getPrev())->setNext((GuestPrev)->getNext());
+			}
+			if (x < (GuestUserCounter - deletedUsers) && x > 1)
+			{
+				((GuestPrev)->getNext())->setPrev((GuestPrev)->getPrev());
+			}
+			GuestUser* tempPtr = GuestPrev;
+			if (x != 1)
+			{
+				GuestPrev = (GuestPrev)->getPrev();
+			}
+			else
+			{
+				GuestPrev = (GuestPrev)->getNext();;
+			}
+			delete tempPtr;
+			deletedUsers += 1;
+		}
+		if (x <= GuestUserCounter - (deletedUsers + 1))
+		{
+			GuestPrev = (GuestPrev)->getNext();
+		}
+	}
+	std::cout << "\nGuests Deleted: " << deletedUsers << std::endl;
+	GuestUserCounter -= deletedUsers;
+}
+
+std::ostream& operator<<(std::ostream& out, GuestUser* user)
+{
+	std::cout << "\nName: " << (user)->getName() << " ID: " << (user)->getID() << std::endl;
+	return out;
+}
+
+void printGuests()
+{
+	GuestNext = GuestNext;
+	std::cout << "\nGuest Users\n";
+	for (int x = 1; x <= GuestUserCounter; x++)
+	{
+		std::cout << GuestPrev;
+		if (x <= GuestUserCounter)
+		{
+			GuestNext = (GuestNext)->getNext();
+		}
+	}
+}
+
+void resetGuests()
+{
+	GuestNext = GuestNext;
+	for (int x = 1; x <= GuestUserCounter; x++)
+	{
+		if (x < GuestUserCounter)
+		{
+			GuestNext = (GuestNext)->getNext();
 		}
 	}
 }
@@ -347,6 +436,25 @@ bool login()
 		}
 	}
 
+	GuestPrev = GuestNext;
+	for (int x = 1; x <= GuestUserCounter; x++)
+	{
+		if (((GuestPrev)->getName()) == username)
+		{
+			if (((GuestPrev)->getPassword()) == password)
+			{
+				userType = 3;
+				std::cout << "login Successful\n" << std::endl;
+				Guest = GuestPrev;
+				return true;
+			}
+		}
+		if (x <= GuestUserCounter)
+		{
+			GuestPrev = (GuestPrev)->getNext();
+		}
+	}
+
 	std::cout << "login Failed" << std::endl;
 	return false;
 }
@@ -355,106 +463,133 @@ void runAdmin()
 {
 	resetAdmins();
 	resetRegisteredUsers();
-	std::cout << "\nAdmin Options \n(1) Log out \n(2) Delete Admin \n(3) Add Admin\n(4) Print Admins \n(5) Delete Registered User \n(6) Register user \n(7) Print Registered users \n(8) View my Details \n(9) Print Available books \n(10) Delete Book \n(11) Add Book";
+	std::cout << "\nAdmin Options \n(1) Log out \n(2) Delete Admin \n(3) Add Admin\n(4) Print Admins \n(5) Delete Registered User \n(6) Register user \n(7) Print Registered users \n(8) View my Details \n(9) Print Available books \n(10) Delete Book \n(11) Add Book \n(12) Register Guest user \n(13) Delete Guest user \n(14) print Guest Users";
 	std::cout << std::endl << "Please enter desired option: ";
 	int input;
 	std::cin >> input;
 
 	switch (input)
 	{
-	case 1:
-	{
-		userType = 0;
-		loggedIn = false;
-		std::cout << "\nLogged out";
-		break;
+		case 1:
+		{
+			userType = 0;
+			loggedIn = false;
+			std::cout << "\nLogged out";
+			break;
+		}
+		case 2:
+		{
+			std::cout << "please enter name of admin to Delete: ";
+			std::string name;
+			std::cin >> name;
+			DeleteAdmin(name);
+			break;
+		}
+		case 3:
+		{
+			std::cout << "please enter name of new admin: ";
+			std::string name;
+			std::cin >> name;
+			std::cout << "please enter password of new admin: ";
+			std::string password;
+			std::cin >> password;
+			idCount++;
+			registerNewAdmin(name, password, idCount);
+			std::cout << "Admin " << name << " has been Registered\n";
+			break;
+		}
+		case 4:
+		{
+			printAdmins();
+			break;
+		}
+		case 5:
+		{
+			std::cout << "please enter name of Registered user to Delete: ";
+			std::string name;
+			std::cin >> name;
+			DeleteRegUser(name);
+			break;
+		}
+		case 6:
+		{
+			std::cout << "please enter name of new user: ";
+			std::string name;
+			std::cin >> name;
+			std::cout << "please enter password of new user: ";
+			std::string password;
+			std::cin >> password;
+			idCount++;
+			registerNewUser(name, password, idCount);
+			std::cout << "User " << name << " has been Registered\n";
+			break;
+		}
+		case 7:
+		{
+			printRegisteredUsers();
+			break;
+		}
+		case 8:
+		{
+			std::cout << admin;
+			break;
+		}
+		case 9:
+		{
+			printAllBooks();
+			break;
+		}
+		case 10:
+		{
+			std::cout << "please enter name of book to Remove: ";
+			std::string name;
+			std::cin >> name;
+			removeBookName(name);
+			break;
+		}
+		case 11:
+		{
+			std::cout << "please enter title of new book: ";
+			std::string title;
+			std::cin >> title;
+			std::cout << "please enter Author of new book: ";
+			std::string Author;
+			std::cin >> Author;
+			std::cout << "please enter ISBN of new book: ";
+			unsigned int ISBN;
+			std::cin >> ISBN;
+			registerNewAdmin(title, Author, ISBN);
+			std::cout << "book " << title << " has been added\n";
+			break;
+		}
+		case 13:
+		{
+			std::cout << "please enter name of Guest user to Delete: ";
+			std::string name;
+			std::cin >> name;
+			DeletGuest(name);
+			break;
+		}
+		case 12:
+		{
+			std::cout << "please enter name of new Guest user: ";
+			std::string name;
+			std::cin >> name;
+			std::cout << "please enter password of new Guest user: ";
+			std::string password;
+			std::cin >> password;
+			idCount++;
+			registerNewGuest(name, password, idCount);
+			std::cout << "Guest user " << name << " has been Registered\n";
+			break;
+		}
+		case 14:
+		{
+			printGuests();
+			break;
+		}
+
 	}
-	case 2:
-	{
-		std::cout << "please enter name of admin to Delete: ";
-		std::string name;
-		std::cin >> name;
-		DeleteAdmin(name);
-		break;
-	}
-	case 3:
-	{
-		std::cout << "please enter name of new admin: ";
-		std::string name;
-		std::cin >> name;
-		std::cout << "please enter password of new admin: ";
-		std::string password;
-		std::cin >> password;
-		idCount++;
-		registerNewAdmin(name, password, idCount);
-		std::cout << "Admin " << name << " has been Registered\n";
-		break;
-	}
-	case 4:
-	{
-		printAdmins();
-		break;
-	}
-	case 5:
-	{
-		std::cout << "please enter name of Registered user to Delete: ";
-		std::string name;
-		std::cin >> name;
-		DeleteRegUser(name);
-		break;
-	}
-	case 6:
-	{
-		std::cout << "please enter name of new user: ";
-		std::string name;
-		std::cin >> name;
-		std::cout << "please enter password of new user: ";
-		std::string password;
-		std::cin >> password;
-		idCount++;
-		registerNewUser(name, password, idCount);
-		std::cout << "User " << name << " has been Registered\n";
-		break;
-	}
-	case 7:
-	{
-		printRegisteredUsers();
-		break;
-	}
-	case 8:
-	{
-		std::cout << admin;
-		break;
-	}
-	case 9:
-	{
-		printAllBooks();
-		break;
-	}
-	case 10:
-	{
-		std::cout << "please enter name of book to Remove: ";
-		std::string name;
-		std::cin >> name;
-		removeBookName(name);
-		break;
-	}
-	case 11:
-	{
-		std::cout << "please enter title of new book: ";
-		std::string title;
-		std::cin >> title;
-		std::cout << "please enter Author of new book: ";
-		std::string Author;
-		std::cin >> Author;
-		std::cout << "please enter ISBN of new book: ";
-		unsigned int ISBN;
-		std::cin >> ISBN;
-		registerNewAdmin(title, Author, ISBN);
-		std::cout << "book " << title << " has been added\n";
-		break;
-	}
-}
 }
 
 void runRegisteredUser()
@@ -483,7 +618,26 @@ void runRegisteredUser()
 
 void runGuest()
 {
-
+	resetAdmins();
+	resetRegisteredUsers();
+	std::cout << "\nRegistered Users Options \n(1) Log out \n(2) print user Details \n (3)Print Available books";
+	std::cout << std::endl << "Please enter desired option: ";
+	int input;
+	std::cin >> input;
+	switch (input)
+	{
+	case 1:
+		userType = 0;
+		loggedIn = false;
+		std::cout << "\nLogged out";
+		break;
+	case 2:
+		std::cout << Reg;
+		break;
+	case 3:
+		printAllBooks();
+		break;
+	}
 }
 
 void initiate()
@@ -520,10 +674,9 @@ void initiate()
 	addBook("The Martian", "Andy Weir", 97808);
 	addBook("The Martian", "Andy Weir", 97808);
 
-	/**
-	newGuest("Tom", "qwerty", 12223);
-	newGuest("cian", "qwerty", 12223);
-	newGuest("kerry", "qwerty", 12223);**/
+	registerNewGuest("Tom", "qwerty", 12223);
+	registerNewGuest("cian", "qwerty", 12223);
+	registerNewGuest("kerry", "qwerty", 12223);
 }
 
 int main()
