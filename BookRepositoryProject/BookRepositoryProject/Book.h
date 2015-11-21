@@ -1,3 +1,4 @@
+#pragma once
 #ifndef nbook
 #define nbook
 #include <string>
@@ -6,7 +7,7 @@
 class book
 {
 public:
-	book(std::string nAuthor, std::string nTitle, unsigned int nISBN);
+	book(std::string nAuthor, std::string nTitle, unsigned int nISBN, unsigned int nQuantity);
 
 	std::string getAuthor() const;
 	std::string getTitle() const;
@@ -16,6 +17,9 @@ public:
 	void setAuthor(std::string nAuthor);
 	void setTitle(std::string ntitle);
 	void setISBN(unsigned int nISBN);
+
+	void setQuantity(unsigned int num);
+	unsigned int getQuantity() const;
 
 	void setNext(book* nextParam);
 	void setPrev(book* prevParam);
@@ -27,9 +31,11 @@ private:
 	std::string author;
 	std::string title;
 	unsigned int ISBN;
+	unsigned int quantity;
 
 	book* next;
 	book* prev;
+
 };
 
 #endif

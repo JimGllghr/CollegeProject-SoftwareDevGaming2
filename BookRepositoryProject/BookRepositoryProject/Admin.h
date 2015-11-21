@@ -1,3 +1,4 @@
+#pragma once
 #ifndef nAdmin
 #define nAdmin
 #include <string>
