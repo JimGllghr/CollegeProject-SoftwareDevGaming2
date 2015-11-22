@@ -1,8 +1,11 @@
 #include "Login.h"
-
+Login::Login(UserManager* nManager)
+{
+	manager = nManager;
+}
 bool Login::login()
 {
-	RegisteredUser* RegPrev = RegFirst;
+	(manager)->reset();
 	std::cout << "Please enter Username: ";
 	std::string username;
 	std::cin >> username;
@@ -10,59 +13,57 @@ bool Login::login()
 	std::string password;
 	std::cin >> password;
 
-	for (int x = 1; x <= RegUserCounter; x++)
+	for (int x = 1; x <= (manager)->getRegUserCounter(); x++)
 	{
-		if (((RegPrev)->getName()) == username)
+		if ((((manager)->getRegPrev())->getName()) == username)
 		{
-			if (((RegPrev)->getPassword()) == password)
+			if ((((manager)->getRegPrev())->getPassword()) == password)
 			{
 				userType = 2;
 				std::cout << "login Successful\n" << std::endl;
-				Reg = RegPrev;
+				Reg = (manager)->getRegPrev();
 				return true;
 			}
 		}
-		if (x <= RegUserCounter)
+		if (x <= (manager)->getRegUserCounter())
 		{
-			RegPrev = (RegPrev)->getNext();
+			(manager)->setRegPrev(((manager)->getRegPrev())->getNext());
 		}
 	}
 
-	Admin* adminPrev = adminFirst;
-	for (int x = 1; x <= adminCounter; x++)
+	for (int x = 1; x <= (manager)->getadminCounter(); x++)
 	{
-		if (((adminPrev)->getName()) == username)
+		if ((((manager)->getadminPrev())->getName()) == username)
 		{
-			if (((adminPrev)->getPassword()) == password)
+			if ((((manager)->getadminPrev())->getPassword()) == password)
 			{
 				userType = 1;
 				std::cout << "login Successful\n" << std::endl;
-				admin = adminPrev;
+				admin = (manager)->getadminPrev();
 				return true;
 			}
 		}
-		if (x <= adminCounter)
+		if (x <= (manager)->getadminCounter())
 		{
-			adminPrev = (adminPrev)->getNext();
+			(manager)->setadminPrev(((manager)->getadminPrev())->getNext());
 		}
 	}
 
-	GuestUser* GuestPrev = GuestNext;
-	for (int x = 1; x <= GuestUserCounter; x++)
+	for (int x = 1; x <= (manager)->getGuestUserCounter(); x++)
 	{
-		if (((GuestPrev)->getName()) == username)
+		if ((((manager)->getGuestPrev())->getName()) == username)
 		{
-			if (((GuestPrev)->getPassword()) == password)
+			if ((((manager)->getGuestPrev())->getPassword()) == password)
 			{
 				userType = 3;
 				std::cout << "login Successful\n" << std::endl;
-				Guest = GuestPrev;
+				Guest = (manager)->getGuestPrev();
 				return true;
 			}
 		}
-		if (x <= GuestUserCounter)
+		if (x <= (manager)->getGuestUserCounter())
 		{
-			GuestPrev = (GuestPrev)->getNext();
+			(manager)->setGuestPrev(((manager)->getGuestPrev())->getNext());
 		}
 	}
 	std::cout << "login Failed" << std::endl;
@@ -73,6 +74,7 @@ unsigned int Login::getUserType() const
 {
 	return userType;
 }
+
 void Login::logout()
 {
 	userType = 0;
@@ -91,43 +93,3 @@ RegisteredUser* Login::getReg() const
 	return Reg;
 }
 
-
-
-void Login::reset()
-{
-	bookPrev = bookFirst;
-	for (int x = 1; x <= RegUserCounter; x++)
-	{
-		if (x < bookCounter)
-		{
-			bookPrev = (bookPrev)->getNext();
-		}
-	}
-
-	GuestPrev = GuestNext;
-	for (int x = 1; x <= GuestUserCounter; x++)
-	{
-		if (x < GuestUserCounter)
-		{
-			GuestPrev = (GuestPrev)->getNext();
-		}
-	}
-
-	adminPrev = adminFirst;
-	for (int x = 1; x <= adminCounter; x++)
-	{
-		if (x < adminCounter)
-		{
-			adminPrev = (adminPrev)->getNext();
-		}
-	}
-
-	RegPrev = RegFirst;
-	for (int x = 1; x <= RegUserCounter; x++)
-	{
-		if (x < RegUserCounter)
-		{
-			RegPrev = (RegPrev)->getNext();
-		}
-	}
-}

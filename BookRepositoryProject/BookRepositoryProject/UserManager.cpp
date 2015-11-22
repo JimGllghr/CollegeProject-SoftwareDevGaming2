@@ -1,90 +1,85 @@
 #pragma once
 #include "UserManager.h"
 
-UserManager::UserManager(Login* aLogin)
-{
-	mLogin = aLogin;
-}
-
 void UserManager::registerNewUser(std::string nName, std::string password, unsigned int ID)
 {
 	RegisteredUser* registeredNewUser = new RegisteredUser(nName, password, ID);
-	if ((mLogin)->RegUserCounter > 0)
+	if (RegUserCounter > 0)
 	{
-		(registeredNewUser)->setPrev((mLogin)->RegPrev);
-		((mLogin)->RegPrev)->setNext(registeredNewUser);
+		(registeredNewUser)->setPrev(RegPrev);
+		(RegPrev)->setNext(registeredNewUser);
 	}
 	else
 	{
-		(mLogin)->RegFirst = registeredNewUser;
+		RegFirst = registeredNewUser;
 	}
-	(mLogin)->RegUserCounter++;
-	(mLogin)->RegPrev = registeredNewUser;
+	RegUserCounter++;
+	RegPrev = registeredNewUser;
 }
 
 void UserManager::DeleteRegUser(std::string nName)
 {
 	int deletedUsers = 0;
-	(mLogin)->RegPrev = (mLogin)->RegFirst;
-	for (int x = 1; x <= (mLogin)->RegUserCounter; x++)
+	RegPrev = RegFirst;
+	for (int x = 1; x <= RegUserCounter; x++)
 	{
-		if ((((mLogin)->RegPrev)->getName()) == nName)
+		if (((RegPrev)->getName()) == nName)
 		{
 			if (x == 1)
 			{
-				(mLogin)->RegFirst = ((mLogin)->RegFirst)->getNext();
+				RegFirst = (RegFirst)->getNext();
 			}
 			else
 			{
-				(((mLogin)->RegPrev)->getPrev())->setNext(((mLogin)->RegPrev)->getNext());
+				((RegPrev)->getPrev())->setNext((RegPrev)->getNext());
 			}
-			if (x < ((mLogin)->RegUserCounter - deletedUsers) && x > 1)
+			if (x < (RegUserCounter - deletedUsers) && x > 1)
 			{
-				(((mLogin)->RegPrev)->getNext())->setPrev(((mLogin)->RegPrev)->getPrev());
+				((RegPrev)->getNext())->setPrev((RegPrev)->getPrev());
 			}
-			RegisteredUser* tempPtr = (mLogin)->RegPrev;
+			RegisteredUser* tempPtr = RegPrev;
 			if (x != 1)
 			{
-				(mLogin)->RegPrev = ((mLogin)->RegPrev)->getPrev();
+				RegPrev = (RegPrev)->getPrev();
 			}
 			else
 			{
-				(mLogin)->RegPrev = ((mLogin)->RegPrev)->getNext();;
+				RegPrev = (RegPrev)->getNext();;
 			}
 			delete tempPtr;
 			deletedUsers += 1;
 		}
-		if (x <= (mLogin)->RegUserCounter - (deletedUsers + 1))
+		if (x <= RegUserCounter - (deletedUsers + 1))
 		{
-			(mLogin)->RegPrev = ((mLogin)->RegPrev)->getNext();
+			RegPrev = (RegPrev)->getNext();
 		}
 	}
 	std::cout << "Registered Users Deleted: " << deletedUsers;
-	(mLogin)->RegUserCounter -= deletedUsers;
+	RegUserCounter -= deletedUsers;
 }
 
 void UserManager::printRegisteredUsers()
 {
-	(mLogin)->RegPrev = (mLogin)->RegFirst;
+	RegPrev = RegFirst;
 	std::cout << "Registered Users\n";
-	for (int x = 1; x <= (mLogin)->RegUserCounter; x++)
+	for (int x = 1; x <= RegUserCounter; x++)
 	{
-		std::cout << (mLogin)->RegPrev;
-		if (x < (mLogin)->RegUserCounter)
+		std::cout << RegPrev;
+		if (x < RegUserCounter)
 		{
-			(mLogin)->RegPrev = ((mLogin)->RegPrev)->getNext();
+			RegPrev = (RegPrev)->getNext();
 		}
 	}
 }
 
 void UserManager::resetRegisteredUsers()
 {
-	(mLogin)->RegPrev = (mLogin)->RegFirst;
-	for (int x = 1; x <= (mLogin)->RegUserCounter; x++)
+	RegPrev = RegFirst;
+	for (int x = 1; x <= RegUserCounter; x++)
 	{
-		if (x < (mLogin)->RegUserCounter)
+		if (x < RegUserCounter)
 		{
-			(mLogin)->RegPrev = ((mLogin)->RegPrev)->getNext();
+			RegPrev = (RegPrev)->getNext();
 		}
 	}
 }
@@ -92,70 +87,70 @@ void UserManager::resetRegisteredUsers()
 void UserManager::registerNewAdmin(std::string nName, std::string password, unsigned int ID)
 {
 	Admin* registeredNewAdmin = new Admin(nName, password, ID);
-	if ((mLogin)->adminCounter > 0)
+	if (adminCounter > 0)
 	{
-		(registeredNewAdmin)->setPrev((mLogin)->adminPrev);
-		((mLogin)->adminPrev)->setNext(registeredNewAdmin);
+		(registeredNewAdmin)->setPrev(adminPrev);
+		(adminPrev)->setNext(registeredNewAdmin);
 	}
 	else
 	{
-		(mLogin)->adminFirst = registeredNewAdmin;
+		adminFirst = registeredNewAdmin;
 	}
-	(mLogin)->adminCounter++;
-	(mLogin)->adminPrev = registeredNewAdmin;
+	adminCounter++;
+	adminPrev = registeredNewAdmin;
 }
 
 void UserManager::DeleteAdmin(std::string nName)
 {
 	int deletedUsers = 0;
-	(mLogin)->adminPrev = (mLogin)->adminFirst;
-	for (int x = 1; x < (mLogin)->adminCounter; x++)
+	adminPrev = adminFirst;
+	for (int x = 1; x < adminCounter; x++)
 	{
-		if ((((mLogin)->adminPrev)->getName()) == nName)
+		if (((adminPrev)->getName()) == nName)
 		{
 			if (x == 1)
 			{
-				(mLogin)->adminFirst = ((mLogin)->adminFirst)->getNext();
+				adminFirst = (adminFirst)->getNext();
 			}
 			else
 			{
-				(((mLogin)->adminPrev)->getPrev())->setNext(((mLogin)->adminPrev)->getNext());
+				((adminPrev)->getPrev())->setNext((adminPrev)->getNext());
 			}
-			if (x < ((mLogin)->adminCounter - deletedUsers) && x > 1)
+			if (x < (adminCounter - deletedUsers) && x > 1)
 			{
-				(((mLogin)->adminPrev)->getNext())->setPrev(((mLogin)->adminPrev)->getPrev());
+				((adminPrev)->getNext())->setPrev((adminPrev)->getPrev());
 			}
-			Admin* tempPtr = (mLogin)->adminPrev;
+			Admin* tempPtr = adminPrev;
 			if (x != 1)
 			{
-				(mLogin)->adminPrev = ((mLogin)->adminPrev)->getPrev();
+				adminPrev = (adminPrev)->getPrev();
 			}
 			else
 			{
-				(mLogin)->adminPrev = ((mLogin)->adminPrev)->getNext();;
+				adminPrev = (adminPrev)->getNext();;
 			}
 			delete tempPtr;
 			deletedUsers += 1;
 		}
-		if (x <= (mLogin)->adminCounter - (deletedUsers + 1))
+		if (x <= adminCounter - (deletedUsers + 1))
 		{
-			(mLogin)->adminPrev = ((mLogin)->adminPrev)->getNext();
+			adminPrev = (adminPrev)->getNext();
 		}
 	}
 	std::cout << "\nAdmins Deleted: " << deletedUsers << std::endl;
-	(mLogin)->adminCounter -= deletedUsers;
+	adminCounter -= deletedUsers;
 }
 
 void UserManager::printAdmins()
 {
-	(mLogin)->adminPrev = (mLogin)->adminFirst;
+	adminPrev = adminFirst;
 	std::cout << "Admins\n";
-	for (int x = 1; x <= (mLogin)->adminCounter; x++)
+	for (int x = 1; x <= adminCounter; x++)
 	{
-		std::cout << (mLogin)->adminPrev;
-		if (x <= (mLogin)->adminCounter)
+		std::cout << adminPrev;
+		if (x <= adminCounter)
 		{
-			(mLogin)->adminPrev = ((mLogin)->adminPrev)->getNext();
+			adminPrev = (adminPrev)->getNext();
 		}
 	}
 }
@@ -163,70 +158,70 @@ void UserManager::printAdmins()
 void UserManager::registerNewGuest(std::string nName, std::string password, unsigned int ID)
 {
 	GuestUser* registeredNewGuest = new GuestUser(nName, password, ID);
-	if ((mLogin)->GuestUserCounter > 0)
+	if (GuestUserCounter > 0)
 	{
-		(registeredNewGuest)->setPrev((mLogin)->GuestPrev);
-		((mLogin)->GuestPrev)->setNext(registeredNewGuest);
+		(registeredNewGuest)->setPrev(GuestPrev);
+		(GuestPrev)->setNext(registeredNewGuest);
 	}
 	else
 	{
-		(mLogin)->GuestNext = registeredNewGuest;
+		GuestNext = registeredNewGuest;
 	}
-	(mLogin)->GuestUserCounter++;
-	(mLogin)->GuestPrev = registeredNewGuest;
+	GuestUserCounter++;
+	GuestPrev = registeredNewGuest;
 }
 
 void UserManager::DeletGuest(std::string nName)
 {
 	int deletedUsers = 0;
-	(mLogin)->GuestPrev = (mLogin)->GuestNext;
-	for (int x = 1; x < (mLogin)->GuestUserCounter; x++)
+	GuestPrev = GuestNext;
+	for (int x = 1; x < GuestUserCounter; x++)
 	{
-		if ((((mLogin)->GuestPrev)->getName()) == nName)
+		if (((GuestPrev)->getName()) == nName)
 		{
 			if (x == 1)
 			{
-				(mLogin)->GuestNext = ((mLogin)->GuestNext)->getNext();
+				GuestNext = (GuestNext)->getNext();
 			}
 			else
 			{
-				(((mLogin)->GuestPrev)->getPrev())->setNext(((mLogin)->GuestPrev)->getNext());
+				((GuestPrev)->getPrev())->setNext((GuestPrev)->getNext());
 			}
-			if (x < ((mLogin)->GuestUserCounter - deletedUsers) && x > 1)
+			if (x < (GuestUserCounter - deletedUsers) && x > 1)
 			{
-				(((mLogin)->GuestPrev)->getNext())->setPrev(((mLogin)->GuestPrev)->getPrev());
+				((GuestPrev)->getNext())->setPrev((GuestPrev)->getPrev());
 			}
-			GuestUser* tempPtr = (mLogin)->GuestPrev;
+			GuestUser* tempPtr = GuestPrev;
 			if (x != 1)
 			{
-				(mLogin)->GuestPrev = ((mLogin)->GuestPrev)->getPrev();
+				GuestPrev = (GuestPrev)->getPrev();
 			}
 			else
 			{
-				(mLogin)->GuestPrev = ((mLogin)->GuestPrev)->getNext();;
+				GuestPrev = (GuestPrev)->getNext();;
 			}
 			delete tempPtr;
 			deletedUsers += 1;
 		}
-		if (x <= (mLogin)->GuestUserCounter - (deletedUsers + 1))
+		if (x <= GuestUserCounter - (deletedUsers + 1))
 		{
-			(mLogin)->GuestPrev = ((mLogin)->GuestPrev)->getNext();
+			GuestPrev = (GuestPrev)->getNext();
 		}
 	}
 	std::cout << "\nGuests Deleted: " << deletedUsers << std::endl;
-	(mLogin)->GuestUserCounter -= deletedUsers;
+	GuestUserCounter -= deletedUsers;
 }
 
 void UserManager::printGuests()
 {
-	(mLogin)->GuestPrev = (mLogin)->GuestNext;
+	GuestPrev = GuestNext;
 	std::cout << "\nGuest Users\n";
-	for (int x = 1; x <= (mLogin)->GuestUserCounter; x++)
+	for (int x = 1; x <= GuestUserCounter; x++)
 	{
-		std::cout << (mLogin)->GuestPrev;
-		if (x <= (mLogin)->GuestUserCounter)
+		std::cout << GuestPrev;
+		if (x <= GuestUserCounter)
 		{
-			(mLogin)->GuestPrev = ((mLogin)->GuestPrev)->getNext();
+			GuestPrev = (GuestPrev)->getNext();
 		}
 	}
 }
@@ -234,87 +229,227 @@ void UserManager::printGuests()
 void UserManager::addBook(std::string nAuthor, std::string nTitle, unsigned int nISBN, unsigned int nQuantity)
 {
 	book* newBook = new book(nAuthor, nTitle, nISBN, nQuantity);
-	if ((mLogin)->bookCounter > 0)
+	if (bookCounter > 0)
 	{
-		(newBook)->setPrev((mLogin)->bookPrev);
-		((mLogin)->bookPrev)->setNext(newBook);
+		(newBook)->setPrev(bookPrev);
+		(bookPrev)->setNext(newBook);
 	}
 	else
 	{
-		(mLogin)->bookFirst = newBook;
+		bookFirst = newBook;
 	}
-	(mLogin)->bookCounter++;
-	(mLogin)->bookPrev = newBook;
+	bookCounter++;
+	bookPrev = newBook;
 }
 
 void UserManager::removeBookName(std::string nName)
 {
 	int deletedUsers = 0;
-	(mLogin)->bookPrev = (mLogin)->bookFirst;
-	for (int x = 1; x <= (mLogin)->bookCounter; x++)
+	bookPrev = bookFirst;
+	for (int x = 1; x <= bookCounter; x++)
 	{
-		if ((((mLogin)->bookPrev)->getTitle()) == nName)
+		if (((bookPrev)->getTitle()) == nName)
 		{
 			if (x == 1)
 			{
-				(mLogin)->bookFirst = ((mLogin)->bookFirst)->getNext();
+				bookFirst = (bookFirst)->getNext();
 			}
 			else
 			{
-				(((mLogin)->bookPrev)->getPrev())->setNext(((mLogin)->bookPrev)->getNext());
+				((bookPrev)->getPrev())->setNext((bookPrev)->getNext());
 			}
-			if (x < ((mLogin)->bookCounter - deletedUsers) && x > 1)
+			if (x < (bookCounter - deletedUsers) && x > 1)
 			{
-				(((mLogin)->bookPrev)->getNext())->setPrev(((mLogin)->bookPrev)->getPrev());
+				((bookPrev)->getNext())->setPrev((bookPrev)->getPrev());
 			}
-			book* tempPtr = (mLogin)->bookPrev;
+			book* tempPtr = bookPrev;
 			if (x != 1)
 			{
-				(mLogin)->bookPrev = ((mLogin)->bookPrev)->getPrev();
+				bookPrev = (bookPrev)->getPrev();
 			}
 			else
 			{
-				(mLogin)->bookPrev = ((mLogin)->bookPrev)->getNext();;
+				bookPrev = (bookPrev)->getNext();;
 			}
 			delete tempPtr;
 			deletedUsers += 1;
 		}
-		if (x <= (mLogin)->bookCounter - (deletedUsers + 1))
+		if (x <= bookCounter - (deletedUsers + 1))
 		{
-			(mLogin)->bookPrev = ((mLogin)->bookPrev)->getNext();
+			bookPrev = (bookPrev)->getNext();
 		}
 	}
 	std::cout << "books Deleted: " << deletedUsers;
-	(mLogin)->bookCounter -= deletedUsers;
+	bookCounter -= deletedUsers;
 }
 
 void UserManager::printAllBooks()
 {
-	(mLogin)->bookPrev = (mLogin)->bookFirst;
+	bookPrev = bookFirst;
 	std::cout << "Books\n";
-	for (int x = 1; x <= (mLogin)->bookCounter; x++)
+	for (int x = 1; x <= bookCounter; x++)
 	{
-		std::cout << (mLogin)->bookPrev;
-		if (x < (mLogin)->bookCounter)
+		std::cout << bookPrev;
+		if (x < bookCounter)
 		{
-			(mLogin)->bookPrev = ((mLogin)->bookPrev)->getNext();
+			bookPrev = (bookPrev)->getNext();
 		}
 	}
 }
 
 void UserManager::printAvailableBooks()
 {
-	(mLogin)->bookPrev = (mLogin)->bookFirst;
+	bookPrev = bookFirst;
 	std::cout << "Books\n";
-	for (int x = 1; x <= (mLogin)->bookCounter; x++)
+	for (int x = 1; x <= bookCounter; x++)
 	{
-		if (((mLogin)->bookPrev)->getQuantity() > 0)
+		if ((bookPrev)->getQuantity() > 0)
 		{
-			std::cout << (mLogin)->bookPrev;
-			if (x < (mLogin)->bookCounter)
+			std::cout << bookPrev;
+			if (x < bookCounter)
 			{
-				(mLogin)->bookPrev = ((mLogin)->bookPrev)->getNext();
+				bookPrev = (bookPrev)->getNext();
 			}
 		}
 	}
+}
+
+
+void UserManager::reset()
+{
+	bookPrev = bookFirst;
+	for (int x = 1; x <= RegUserCounter; x++)
+	{
+		if (x < bookCounter)
+		{
+			bookPrev = (bookPrev)->getNext();
+		}
+	}
+
+	GuestPrev = GuestNext;
+	for (int x = 1; x <= GuestUserCounter; x++)
+	{
+		if (x < GuestUserCounter)
+		{
+			GuestPrev = (GuestPrev)->getNext();
+		}
+	}
+
+	adminPrev = adminFirst;
+	for (int x = 1; x <= adminCounter; x++)
+	{
+		if (x < adminCounter)
+		{
+			adminPrev = (adminPrev)->getNext();
+		}
+	}
+
+	RegPrev = RegFirst;
+	for (int x = 1; x <= RegUserCounter; x++)
+	{
+		if (x < RegUserCounter)
+		{
+			RegPrev = (RegPrev)->getNext();
+		}
+	}
+}
+
+Admin* UserManager::getadminFirst()
+{
+	return adminFirst;
+}
+Admin* UserManager::getadminPrev()
+{
+	return adminPrev;
+}
+GuestUser* UserManager::getGuestNext()
+{
+	return GuestNext;
+}
+GuestUser* UserManager::getGuestPrev()
+{
+	return GuestPrev;
+}
+RegisteredUser* UserManager::getRegFirst()
+{
+	return RegFirst;
+}
+RegisteredUser* UserManager::getRegPrev()
+{
+	return RegPrev;
+}
+book* UserManager::getbookFirst()
+{
+	return bookFirst;
+}
+book* UserManager::getbookPrev()
+{
+	return bookPrev;
+}
+
+int UserManager::getRegUserCounter()
+{
+	return RegUserCounter;
+}
+int UserManager::getGuestUserCounter()
+{
+	return GuestUserCounter;
+}
+int UserManager::getadminCounter()
+{
+	return adminCounter;
+}
+int UserManager::getbookCounter()
+{
+	return bookCounter;
+}
+
+void UserManager::setadminFirst(Admin* nPtr)
+{
+	adminFirst = nPtr;
+}
+void UserManager::setadminPrev(Admin* nPtr)
+{
+	adminPrev = nPtr;
+}
+void UserManager::setGuestNext(GuestUser* nPtr)
+{
+	GuestNext = nPtr;
+}
+void UserManager::setGuestPrev(GuestUser* nPtr)
+{
+	GuestPrev = nPtr;
+}
+void UserManager::setRegFirst(RegisteredUser* nPtr)
+{
+	RegFirst = nPtr;
+}
+void UserManager::setRegPrev(RegisteredUser* nPtr)
+{
+	RegPrev = nPtr;
+}
+void UserManager::setbookFirst(book* nPtr)
+{
+	bookFirst = nPtr;
+}
+void UserManager::setbookPrev(book* nPtr)
+{
+	bookPrev = nPtr;
+}
+
+void UserManager::setRegUserCounter(int num)
+{
+	RegUserCounter = num;
+}
+void UserManager::setGuestUserCounter(int num)
+{
+	GuestUserCounter = num;
+}
+void UserManager::setadminCounter(int num)
+{
+	adminCounter = num;
+}
+void UserManager::setbookCounter(int num)
+{
+	bookCounter = num;
 }

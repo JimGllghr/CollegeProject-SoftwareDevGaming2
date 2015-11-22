@@ -5,6 +5,7 @@
 #include <string>
 #include "User.h"
 #include "book.h"
+#include "UserManager.h"
 
 #include <iostream>
 
@@ -16,7 +17,7 @@ public:
 	void setNext(RegisteredUser* nextParam);
 	void setPrev(RegisteredUser* prevParam);
 
-	void LoanBook(book* bookPrev, book* bookFirst, int bookCounter);
+	void LoanBook(UserManager* manager);
 
 	book* getloanedBookPrev() const;
 

@@ -111,7 +111,7 @@ void RegisteredUser::resetbooks()
 	}
 }
 
-void RegisteredUser::LoanBook(book* bookPrev, book* bookFirst, int bookCounter)
+void RegisteredUser::LoanBook(UserManager* manager)
 {
 	int deletedUsers = 0;
 
@@ -121,11 +121,11 @@ void RegisteredUser::LoanBook(book* bookPrev, book* bookFirst, int bookCounter)
 	std::cout << "\nplease enter name of The book you want to loan: ";
 	std::string name;
 	std::cin >> name;
-	for (int x = 1; x <= bookCounter; x++)
+	for (int x = 1; x <= ((manager)->getbookCounter()); x++)
 	{
-		if (((bookPrev)->getTitle()) == name && (bookPrev)->getQuantity()>0)
+		if ((((manager)->getbookPrev())->getTitle()) == name && ((manager)->getbookPrev())->getQuantity()>0)
 		{
-			book* newBook = new book((bookPrev)->getAuthor(), (bookPrev)->getTitle(), (bookPrev)->getISBN(), 0);
+			book* newBook = new book(((manager)->getbookPrev())->getAuthor(), ((manager)->getbookPrev())->getTitle(), ((manager)->getbookPrev())->getISBN(), 0);
 			if (loanedBookCounter > 0)
 			{
 				(newBook)->setPrev(loanedBookPrev);
@@ -138,17 +138,17 @@ void RegisteredUser::LoanBook(book* bookPrev, book* bookFirst, int bookCounter)
 			loanedBookCounter++;
 			loanedBookPrev = newBook;
 			
-			(bookPrev)->setQuantity(((bookPrev)->getQuantity()) - 1);
-			std::cout << "Book "<<(bookPrev)->getTitle() <<" has been taken out on loan.\n";
+			((manager)->getbookPrev())->setQuantity((((manager)->getbookPrev())->getQuantity()) - 1);
+			std::cout << "Book "<<((manager)->getbookPrev())->getTitle() <<" has been taken out on loan.\n";
 		}
-		if (x <= bookCounter - (deletedUsers + 1))
+		if (x <= ((manager)->getbookCounter()) - (deletedUsers + 1))
 		{
-			bookPrev = (bookPrev)->getNext();
+			(manager)->setbookPrev(((manager)->getbookPrev())->getNext());
 		}
 	}
 	if (deletedUsers == 0)
 	{
 		std::cout << "Book not available";
 	}
-	bookCounter -= deletedUsers;
+	((manager)->setbookCounter((manager)->getbookCounter() - deletedUsers));
 }

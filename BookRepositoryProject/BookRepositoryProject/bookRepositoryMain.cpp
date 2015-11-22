@@ -13,7 +13,7 @@ Login* login;
 UserManager* manager;
 void runAdmin()
 {
-	(login)->reset();
+	(manager)->reset();
 	std::cout << "\nAdmin Options \n(1) Log out \n(2) Delete Admin \n(3) Add Admin\n(4) Print Admins \n(5) Delete Registered User \n(6) Register user \n(7) Print Registered users \n(8) View my Details \n(9) Print Available books \n(10) Delete Book \n(11) Add Book \n(12) Register Guest user \n(13) Delete Guest user \n(14) print Guest Users";
 	std::cout << std::endl << "Please enter desired option: ";
 	int input;
@@ -147,8 +147,7 @@ void runAdmin()
 
 void runRegisteredUser()
 {
-	(login)->reset();
-	(manager)->resetRegisteredUsers();
+	(manager)->reset();
 	std::cout << "\nRegistered Users Options \n(1) Log out \n(2) print user Details \n(3) Print Available books \n(4) View current book Loans \n(5) loan book \n(6) Return book";
 	std::cout << std::endl << "Please enter desired option: ";
 	std::cin.clear(); // clears the error flags
@@ -174,8 +173,8 @@ void runRegisteredUser()
 		((login)->getReg())->printAllBooks();
 		break;
 	case 5:
-		(login)->bookPrev = (login)->bookFirst;
-		((login)->getReg())->LoanBook((login)->bookPrev, (login)->bookFirst, (login)->bookCounter);
+		(manager)->setbookPrev((manager)->getbookFirst());
+		((login)->getReg())->LoanBook(manager);
 		break;
 	}
 }
@@ -204,12 +203,12 @@ void runGuest()
 
 void initiate()
 {
-	login = new Login();
-	manager = new UserManager(login);
+	manager = new UserManager();
+	login = new Login(manager);
 	idCount = 10000;
-	(login)->RegUserCounter = 0;
-	(login)->GuestUserCounter = 0;
-	(login)->adminCounter = 0;
+	(manager)->setRegUserCounter(0);
+	(manager)->setGuestUserCounter(0);
+	(manager)->setadminCounter(0);
 
 	(manager)->registerNewUser("james", "sandwich", 26622);
 	(manager)->registerNewUser("Clara", "blueberry", 12233);

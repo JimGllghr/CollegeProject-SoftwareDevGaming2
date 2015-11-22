@@ -9,7 +9,7 @@
 class UserManager
 {
 public:
-	UserManager(Login* aLogin);
+	UserManager();
 	void registerNewUser(std::string nName, std::string password, unsigned int ID);
 	void DeleteRegUser(std::string nName);
 	void printRegisteredUsers();
@@ -24,6 +24,49 @@ public:
 	void removeBookName(std::string nName);
 	void printAllBooks();
 	void printAvailableBooks();
+
+	Admin* getadminFirst();
+	Admin* getadminPrev();
+	GuestUser* getGuestNext();
+	GuestUser* getGuestPrev();
+	RegisteredUser* getRegFirst();
+	RegisteredUser* getRegPrev();
+	book* getbookFirst();
+	book* getbookPrev();
+
+	int getRegUserCounter();
+	int getGuestUserCounter();
+	int getadminCounter();
+	int getbookCounter();
+
+	void setadminFirst (Admin* nPtr);
+	void setadminPrev (Admin* nPtr);
+	void setGuestNext (GuestUser* nPtr);
+	void setGuestPrev (GuestUser* nPtr);
+	void setRegFirst (RegisteredUser* nPtr);
+	void setRegPrev (RegisteredUser* nPtr);
+	void setbookFirst (book* nPtr);
+	void setbookPrev (book* nPtr);
+
+	void setRegUserCounter(int num);
+	void setGuestUserCounter (int num);
+	void setadminCounter (int num);
+	void setbookCounter (int num);
+
+	void reset();
+
 private:
-	Login* mLogin;
+	Admin* adminFirst;
+	Admin* adminPrev;
+	GuestUser* GuestNext;
+	GuestUser* GuestPrev;
+	RegisteredUser* RegFirst;
+	RegisteredUser* RegPrev;
+	book* bookFirst;
+	book* bookPrev;
+
+	int RegUserCounter;
+	int GuestUserCounter;
+	int adminCounter;
+	int bookCounter;
 };

@@ -11,37 +11,22 @@
 class Login
 {
 public:
+	Login(UserManager* nManager);
+
 	bool login();
-
-	unsigned int getUserType() const;
-	void setUserType(unsigned int nType);
-
 	void logout();
 
+	unsigned int getUserType() const;
 	Admin* getAdmin() const;
 	GuestUser* getGuest() const;
 	RegisteredUser* getReg() const;
 
-	Admin* adminFirst;
-	Admin* adminPrev;
-	GuestUser* GuestNext;
-	GuestUser* GuestPrev;
-	RegisteredUser* RegFirst;
-	RegisteredUser* RegPrev;
-	book* bookFirst;
-	book* bookPrev;
-
-	int RegUserCounter;
-	int GuestUserCounter;
-	int adminCounter;
-	int bookCounter;
-
-	void Login::reset();
 private:
 	unsigned int userType;
 	Admin* admin;
 	GuestUser* Guest;
 	RegisteredUser* Reg;
+	UserManager* manager;
 };
 
 #endif
