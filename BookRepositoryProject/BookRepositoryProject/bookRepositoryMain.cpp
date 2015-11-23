@@ -23,6 +23,7 @@ void runAdmin()
 	{
 		case 1:
 		{
+			system("cls");
 			(login)->logout();
 			loggedIn = false;
 			std::cout << "\nLogged out\n";
@@ -30,6 +31,7 @@ void runAdmin()
 		}
 		case 2:
 		{
+			system("cls");
 			std::cout << "please enter name of admin to Delete: ";
 			std::string name;
 			std::cin >> name;
@@ -38,6 +40,7 @@ void runAdmin()
 		}
 		case 3:
 		{
+			system("cls");
 			std::cout << "please enter name of new admin: ";
 			std::string name;
 			std::cin >> name;
@@ -51,11 +54,13 @@ void runAdmin()
 		}
 		case 4:
 		{
+			system("cls");
 			(adminIterator)->printAdmins();
 			break;
 		}
 		case 5:
 		{
+			system("cls");
 			std::cout << "please enter name of Registered user to Delete: ";
 			std::string name;
 			std::cin >> name;
@@ -64,6 +69,7 @@ void runAdmin()
 		}
 		case 6:
 		{
+			system("cls");
 			std::cout << "please enter name of new user: ";
 			std::string name;
 			std::cin >> name;
@@ -77,16 +83,19 @@ void runAdmin()
 		}
 		case 7:
 		{
+			system("cls");
 			(regUserIterator)->printRegisteredUsers();
 			break;
 		}
 		case 8:
 		{
+			system("cls");
 			(bookIterator)->printAllBooks();
 			break;
 		}
 		case 9:
 		{
+			system("cls");
 			std::cout << "please enter name of book to Remove: ";
 			std::string name;
 			std::getline(std::cin, name);
@@ -96,6 +105,7 @@ void runAdmin()
 		}
 		case 10:
 		{
+			system("cls");
 			std::cout << "please enter title of new book: ";
 			std::string title;
 			std::cin >> title;
@@ -114,6 +124,7 @@ void runAdmin()
 		}
 		case 11:
 		{
+			system("cls");
 			std::cout << "please enter name of Guest user to Delete: ";
 			std::string name;
 			std::cin >> name;
@@ -122,6 +133,7 @@ void runAdmin()
 		}
 		case 12:
 		{
+			system("cls");
 			std::cout << "please enter name of new Guest user: ";
 			std::string name;
 			std::cin >> name;
@@ -135,6 +147,7 @@ void runAdmin()
 		}
 		case 13:
 		{
+			system("cls");
 			(guestIterator)->printGuests();
 		}
 		std::cin.clear();
@@ -150,26 +163,33 @@ void runRegisteredUser()
 	switch (input)
 	{
 	case 1:
+		system("cls");
 		(login)->logout();
 		loggedIn = false;
 		std::cout << "\nLogged out\n";
 		break;
 	case 2:
+		system("cls");
 		(bookIterator)->printAvailableBooks();
 		break;
 	case 3:
+		system("cls");
 		((login)->getReg())->loanBook(bookIterator);
 		break;
 	case 4:
+		system("cls");
 		((login)->getReg())->returnBook(bookIterator);
 		break;
 	case 5:
+		system("cls");
 		((login)->getReg())->printLoanedBooks();
 		break;
 	case 6:
+		system("cls");
 		(bookIterator)->searchForBook();
 		break;
 	case 7:
+		system("cls");
 		(bookIterator)->searchForBookISBN();
 		break;
 	}
@@ -184,17 +204,21 @@ void runGuest()
 	switch (input)
 	{
 	case 1:
+		system("cls");
 		(login)->logout();
 		loggedIn = false;
 		std::cout << "\nLogged out\n";
 		break;
 	case 2:
+		system("cls");
 		(bookIterator)->printAvailableBooks();
 		break;
 	case 3:
+		system("cls");
 		(bookIterator)->searchForBook();
 		break;
 	case 4:
+		system("cls");
 		(bookIterator)->searchForBookISBN();
 		break;
 	}
