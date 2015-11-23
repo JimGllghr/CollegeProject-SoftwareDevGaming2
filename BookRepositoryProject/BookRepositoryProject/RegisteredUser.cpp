@@ -2,7 +2,7 @@
 
 RegisteredUser::RegisteredUser(std::string nName, std::string nPassword, unsigned int nID) : user(nName, nPassword, nID)
 {
-	loanedBookCounter = 0;
+	loanedBooks = new BookIterator();
 }
 
 void RegisteredUser::setNext(RegisteredUser* nextParam)
@@ -23,132 +23,69 @@ RegisteredUser*  RegisteredUser::getPrev() const
 	return prev;
 }
 
-book*  RegisteredUser::getloanedBookPrev() const
+void RegisteredUser::loanBook(BookIterator* library)
 {
-	return loanedBookPrev;
-}
-
-void RegisteredUser::addBook(std::string nAuthor, std::string nTitle, unsigned int nISBN)
-{
-	book* newBook = new book(nAuthor, nTitle, nISBN, 0);
-	if (loanedBookCounter > 0)
-	{
-		(newBook)->setPrev(loanedBookPrev);
-		(loanedBookPrev)->setNext(newBook);
-	}
-	else
-	{
-		loanedBookFirst = newBook;
-	}
-	loanedBookCounter++;
-	loanedBookPrev = newBook;
-}
-
-void RegisteredUser::removeBookName(std::string nName)
-{
-	int deletedUsers = 0;
-	loanedBookPrev = loanedBookFirst;
-	for (int x = 1; x <= loanedBookCounter; x++)
-	{
-		if (((loanedBookPrev)->getTitle()) == nName)
-		{
-			if (x == 1)
-			{
-				loanedBookFirst = (loanedBookFirst)->getNext();
-			}
-			else
-			{
-				((loanedBookPrev)->getPrev())->setNext((loanedBookPrev)->getNext());
-			}
-			if (x < (loanedBookCounter - deletedUsers) && x > 1)
-			{
-				((loanedBookPrev)->getNext())->setPrev((loanedBookPrev)->getPrev());
-			}
-			book* tempPtr = loanedBookPrev;
-			if (x != 1)
-			{
-				loanedBookPrev = (loanedBookPrev)->getPrev();
-			}
-			else
-			{
-				loanedBookPrev = (loanedBookPrev)->getNext();;
-			}
-			delete tempPtr;
-			deletedUsers += 1;
-		}
-		if (x <= loanedBookCounter - (deletedUsers + 1))
-		{
-			loanedBookPrev = (loanedBookPrev)->getNext();
-		}
-	}
-	std::cout << "books Deleted: " << deletedUsers;
-	loanedBookCounter -= deletedUsers;
-}
-
-void RegisteredUser::printAllBooks()
-{
-	loanedBookPrev = loanedBookFirst;
-	std::cout << "Books\n";
-	for (int x = 1; x <= loanedBookCounter; x++)
-	{
-		std::cout << loanedBookPrev;
-		if (x < loanedBookCounter)
-		{
-			loanedBookPrev = (loanedBookPrev)->getNext();
-		}
-	}
-}
-
-void RegisteredUser::resetbooks()
-{
-	loanedBookPrev = loanedBookFirst;
-	for (int x = 1; x <= loanedBookCounter; x++)
-	{
-		if (x < loanedBookCounter)
-		{
-			loanedBookPrev = (loanedBookPrev)->getNext();
-		}
-	}
-}
-
-void RegisteredUser::LoanBook(UserManager* manager)
-{
-	int deletedUsers = 0;
-
-	std::cin.clear(); // clears the error flags
-					  // this line discards all the input waiting in the stream
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	std::cout << "\nplease enter name of The book you want to loan: ";
+	(library)->setbookPrev((library)->getbookFirst());
+	(loanedBooks)->reset();
+	std::cout << "please enter title of book to take on loan: ";
 	std::string name;
 	std::cin >> name;
-	for (int x = 1; x <= ((manager)->getbookCounter()); x++)
+	for (int x = 1; x <= (library)->getbookCounter(); x++)
 	{
-		if ((((manager)->getbookPrev())->getTitle()) == name && ((manager)->getbookPrev())->getQuantity()>0)
+		if ((((library)->getbookPrev())->getTitle()) == name)
 		{
-			book* newBook = new book(((manager)->getbookPrev())->getAuthor(), ((manager)->getbookPrev())->getTitle(), ((manager)->getbookPrev())->getISBN(), 0);
-			if (loanedBookCounter > 0)
+			if ((((library)->getbookPrev())->getQuantity()) > 0)
 			{
-				(newBook)->setPrev(loanedBookPrev);
-				(loanedBookPrev)->setNext(newBook);
+				(loanedBooks)->addBook(((library)->getbookPrev())->getAuthor(), ((library)->getbookPrev())->getTitle(), ((library)->getbookPrev())->getISBN(), 1);
+				((library)->getbookPrev())->setQuantity(((library)->getbookPrev()->getQuantity())-1);
+				std::cout << "Book Taken on Loan";
+				return;
 			}
-			else
-			{
-				loanedBookFirst = newBook;
-			}
-			loanedBookCounter++;
-			loanedBookPrev = newBook;
-			
-			((manager)->getbookPrev())->setQuantity((((manager)->getbookPrev())->getQuantity()) - 1);
-			std::cout << "Book "<<((manager)->getbookPrev())->getTitle() <<" has been taken out on loan.\n";
 		}
-		if (x <= ((manager)->getbookCounter()) - (deletedUsers + 1))
+		if (x <= (library)->getbookCounter())
 		{
-			(manager)->setbookPrev(((manager)->getbookPrev())->getNext());
+			(library)->setbookPrev(((library)->getbookPrev())->getNext());
 		}
 	}
-	if (deletedUsers == 0)
+	std::cout << "Book Not found\n";
+}
+
+void RegisteredUser::returnBook(BookIterator* library)
+{
+	(library)->setbookPrev((library)->getbookFirst());
+	(loanedBooks)->setbookPrev((loanedBooks)->getbookFirst());
+	std::cout << "please enter title of book to Return: ";
+	std::string name;
+	std::cin >> name;
+	for (int x = 1; x <= (loanedBooks)->getbookCounter(); x++)
 	{
-		std::cout << "Book not available";
+		if ((((loanedBooks)->getbookPrev())->getTitle()) == name)
+		{
+			for (int x = 1; x <= (library)->getbookCounter(); x++)
+			{
+				if ((((library)->getbookPrev())->getTitle()) == name)
+				{
+					((library)->getbookPrev())->setQuantity(((library)->getbookPrev()->getQuantity()) + 1);
+				}
+				if (x <= (library)->getbookCounter())
+				{
+					(library)->setbookPrev(((library)->getbookPrev())->getNext());
+				}
+			}
+			(loanedBooks)->removeBookName(name);
+			std::cout << "\n Book Returned\n";
+			return;
+		}
+		if (x <= (loanedBooks)->getbookCounter())
+		{
+			(loanedBooks)->setbookPrev(((loanedBooks)->getbookPrev())->getNext());
+		}
 	}
-	((manager)->setbookCounter((manager)->getbookCounter() - deletedUsers));
+
+	std::cout << "no books Returned\n";
+}
+
+void RegisteredUser::printLoanedBooks()
+{
+	(loanedBooks)->printAllBooks();
 }

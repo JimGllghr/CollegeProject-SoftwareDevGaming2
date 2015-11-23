@@ -1,13 +1,11 @@
-
 #pragma once
 #ifndef nRegisteredUser
 #define nRegisteredUser
-#include <string>
-#include "User.h"
-#include "book.h"
-#include "UserManager.h"
-
 #include <iostream>
+#include <string>
+#include "user.h"
+#include "book.h"
+#include "BookIterator.h"
 
 class RegisteredUser : public user
 {
@@ -17,26 +15,18 @@ public:
 	void setNext(RegisteredUser* nextParam);
 	void setPrev(RegisteredUser* prevParam);
 
-	void LoanBook(UserManager* manager);
-
-	book* getloanedBookPrev() const;
-
 	RegisteredUser* getNext() const;
 	RegisteredUser* getPrev() const;
 
-	void printAllBooks();
-	void removeBookName(std::string nName);
-	void resetbooks();
-	void addBook(std::string nAuthor, std::string nTitle, unsigned int nISBN);
+	void loanBook(BookIterator* library);
+	void returnBook(BookIterator* library);
+	void printLoanedBooks();
 
 private:
 	RegisteredUser* next;
 	RegisteredUser* prev;
 
-	book* loanedBookFirst;
-	book* loanedBookPrev;
-
-	int loanedBookCounter;
+	BookIterator* loanedBooks;
 };
 
 #endif

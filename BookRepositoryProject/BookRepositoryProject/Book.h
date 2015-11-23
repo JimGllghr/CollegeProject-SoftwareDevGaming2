@@ -1,8 +1,8 @@
 #pragma once
 #ifndef nbook
 #define nbook
-#include <string>
 #include <iostream>
+#include <string>
 
 class book
 {

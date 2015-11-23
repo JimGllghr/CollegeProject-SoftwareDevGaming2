@@ -1,9 +1,7 @@
 #pragma once
 #ifndef nAdmin
 #define nAdmin
-#include <string>
-#include "User.h"
-
+#include "user.h"
 #include <iostream>
 
 class Admin : public user

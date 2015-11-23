@@ -2,31 +2,35 @@
 #pragma once
 #ifndef nLogin
 #define nLogin
-#include <string>
-#include <iostream>
 #include "GuestUser.h"
 #include "RegisteredUser.h"
 #include "Admin.h"
+#include "book.h"
+#include "AdminIterator.h"
+#include "GuestIterator.h"
+#include "BookIterator.h"
+#include "RegUserIterator.h"
 
 class Login
 {
 public:
-	Login(UserManager* nManager);
+	Login(AdminIterator* aAdminIterator, GuestIterator* aGuestIterator, RegUserIterator* aRegUserIterator, BookIterator* aBookIterator);
 
 	bool login();
 	void logout();
 
 	unsigned int getUserType() const;
-	Admin* getAdmin() const;
-	GuestUser* getGuest() const;
-	RegisteredUser* getReg() const;
 
+	RegisteredUser* getReg();
 private:
 	unsigned int userType;
-	Admin* admin;
-	GuestUser* Guest;
+
+	AdminIterator* adminIterator;
+	GuestIterator* guestIterator;
+	RegUserIterator* regUserIterator;
+	BookIterator* bookIterator;
+
 	RegisteredUser* Reg;
-	UserManager* manager;
 };
 
 #endif

@@ -1,104 +1,31 @@
-﻿Build started 22/11/2015 15:42:53.
+﻿Build started 23/11/2015 00:20:29.
      1>Project "C:\Users\James\Documents\Software.cpp\BookRepositoryProject\BookRepositoryProject\BookRepositoryProject.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt RegisteredUser.cpp UserManager.cpp bookRepositoryMain.cpp login.cpp
-         login.cpp
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(32): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(32): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(32): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(33): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(33): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(33): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(46): error C2061: syntax error: identifier 'RegisteredUser'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(47): error C2061: syntax error: identifier 'RegisteredUser'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(63): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(63): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(63): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(64): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(64): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(64): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.cpp(18): error C2039: 'getRegPrev': is not a member of 'UserManager'
-         c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(10): note: see declaration of 'UserManager'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.cpp(18): error C2227: left of '->getName' must point to class/struct/union/generic type
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.cpp(20): error C2039: 'getRegPrev': is not a member of 'UserManager'
-         c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(10): note: see declaration of 'UserManager'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.cpp(20): error C2227: left of '->getPassword' must point to class/struct/union/generic type
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.cpp(24): error C2039: 'getRegPrev': is not a member of 'UserManager'
-         c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(10): note: see declaration of 'UserManager'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.cpp(30): error C2039: 'getRegPrev': is not a member of 'UserManager'
-         c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(10): note: see declaration of 'UserManager'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.cpp(30): error C2227: left of '->getNext' must point to class/struct/union/generic type
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.cpp(30): error C2660: 'UserManager::setRegPrev': function does not take 1 arguments
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt BookIterator.cpp RegUserIterator.cpp RegisteredUser.cpp UserManager.cpp bookRepositoryMain.cpp login.cpp
          bookRepositoryMain.cpp
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(14): error C2061: syntax error: identifier 'UserManager'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(22): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(22): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(28): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(28): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(28): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(29): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(29): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(29): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(32): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(32): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(32): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(33): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(33): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(33): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(46): error C2061: syntax error: identifier 'RegisteredUser'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(47): error C2061: syntax error: identifier 'RegisteredUser'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(63): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(63): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(63): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(64): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(64): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(64): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\bookrepositorymain.cpp(167): error C2039: 'getReg': is not a member of 'Login'
-         c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(12): note: see declaration of 'Login'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\bookrepositorymain.cpp(173): error C2039: 'getReg': is not a member of 'Login'
-         c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(12): note: see declaration of 'Login'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\bookrepositorymain.cpp(173): error C2227: left of '->printAllBooks' must point to class/struct/union/generic type
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\bookrepositorymain.cpp(177): error C2039: 'getReg': is not a member of 'Login'
-         c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(12): note: see declaration of 'Login'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\bookrepositorymain.cpp(177): error C2227: left of '->LoanBook' must point to class/struct/union/generic type
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\bookrepositorymain.cpp(207): error C2664: 'Login::Login(Login &&)': cannot convert argument 1 from 'UserManager *' to 'const Login &'
-         c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\bookrepositorymain.cpp(207): note: Reason: cannot convert from 'UserManager *' to 'const Login'
-         c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\bookrepositorymain.cpp(207): note: No constructor could take the source type, or constructor overload resolution was ambiguous
-         UserManager.cpp
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\registereduser.h(20): error C2061: syntax error: identifier 'UserManager'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(14): error C2061: syntax error: identifier 'UserManager'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(29): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(29): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(29): error C2238: unexpected token(s) preceding ';'
-         RegisteredUser.cpp
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(14): error C2061: syntax error: identifier 'UserManager'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(22): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(22): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(28): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(28): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(28): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(29): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(29): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\login.h(29): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(32): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(32): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(32): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(33): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(33): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(33): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(46): error C2061: syntax error: identifier 'RegisteredUser'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(47): error C2061: syntax error: identifier 'RegisteredUser'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(63): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(63): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(63): error C2238: unexpected token(s) preceding ';'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(64): error C2143: syntax error: missing ';' before '*'
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(64): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\james\documents\software.cpp\bookrepositoryproject\bookrepositoryproject\usermanager.h(64): error C2238: unexpected token(s) preceding ';'
+         BookIterator.cpp
          Generating Code...
-     1>Done Building Project "C:\Users\James\Documents\Software.cpp\BookRepositoryProject\BookRepositoryProject\BookRepositoryProject.vcxproj" (Build target(s)) -- FAILED.
+         Skipping... (no relevant changes detected)
+         UserManager.cpp
+         login.cpp
+         RegisteredUser.cpp
+         RegUserIterator.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\James\Documents\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\James\Documents\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\James\Documents\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.lib" /MACHINE:X86 Debug\Admin.obj
+         Debug\AdminIterator.obj
+         Debug\book.obj
+         Debug\BookIterator.obj
+         Debug\bookRepositoryMain.obj
+         Debug\GuestIterator.obj
+         Debug\GuestUser.obj
+         Debug\login.obj
+         Debug\RegisteredUser.obj
+         Debug\RegUserIterator.obj
+         Debug\User.obj
+         Debug\UserManager.obj
+         BookRepositoryProject.vcxproj -> C:\Users\James\Documents\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.exe
+     1>Done Building Project "C:\Users\James\Documents\Software.cpp\BookRepositoryProject\BookRepositoryProject\BookRepositoryProject.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:06.42
+Time Elapsed 00:00:04.82

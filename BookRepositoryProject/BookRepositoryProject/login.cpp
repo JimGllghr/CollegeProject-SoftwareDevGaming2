@@ -1,11 +1,18 @@
 #include "Login.h"
-Login::Login(UserManager* nManager)
+
+Login::Login(AdminIterator* aAdminIterator, GuestIterator* aGuestIterator, RegUserIterator* aRegUserIterator, BookIterator* aBookIterator)
 {
-	manager = nManager;
+	adminIterator = aAdminIterator;
+	guestIterator = aGuestIterator;
+	regUserIterator = aRegUserIterator;
+	bookIterator = aBookIterator;
 }
 bool Login::login()
 {
-	(manager)->reset();
+	(adminIterator)->setadminPrev((adminIterator)->getadminFirst());
+	(guestIterator)->setGuestPrev((guestIterator)->getGuestNext());
+	(regUserIterator)->setRegPrev((regUserIterator)->getRegFirst());
+
 	std::cout << "Please enter Username: ";
 	std::string username;
 	std::cin >> username;
@@ -13,57 +20,55 @@ bool Login::login()
 	std::string password;
 	std::cin >> password;
 
-	for (int x = 1; x <= (manager)->getRegUserCounter(); x++)
+	for (int x = 1; x <= (regUserIterator)->getRegUserCounter(); x++)
 	{
-		if ((((manager)->getRegPrev())->getName()) == username)
+		if ((((regUserIterator)->getRegPrev())->getName()) == username)
 		{
-			if ((((manager)->getRegPrev())->getPassword()) == password)
+			if ((((regUserIterator)->getRegPrev())->getPassword()) == password)
 			{
 				userType = 2;
 				std::cout << "login Successful\n" << std::endl;
-				Reg = (manager)->getRegPrev();
+				Reg = (regUserIterator)->getRegPrev();
 				return true;
 			}
 		}
-		if (x <= (manager)->getRegUserCounter())
+		if (x <= (regUserIterator)->getRegUserCounter())
 		{
-			(manager)->setRegPrev(((manager)->getRegPrev())->getNext());
+			(regUserIterator)->setRegPrev(((regUserIterator)->getRegPrev())->getNext());
 		}
 	}
 
-	for (int x = 1; x <= (manager)->getadminCounter(); x++)
+	for (int x = 1; x <= (adminIterator)->getadminCounter(); x++)
 	{
-		if ((((manager)->getadminPrev())->getName()) == username)
+		if ((((adminIterator)->getadminPrev())->getName()) == username)
 		{
-			if ((((manager)->getadminPrev())->getPassword()) == password)
+			if ((((adminIterator)->getadminPrev())->getPassword()) == password)
 			{
 				userType = 1;
 				std::cout << "login Successful\n" << std::endl;
-				admin = (manager)->getadminPrev();
 				return true;
 			}
 		}
-		if (x <= (manager)->getadminCounter())
+		if (x <= (adminIterator)->getadminCounter())
 		{
-			(manager)->setadminPrev(((manager)->getadminPrev())->getNext());
+			(adminIterator)->setadminPrev(((adminIterator)->getadminPrev())->getNext());
 		}
 	}
 
-	for (int x = 1; x <= (manager)->getGuestUserCounter(); x++)
+	for (int x = 1; x <= (guestIterator)->getGuestUserCounter(); x++)
 	{
-		if ((((manager)->getGuestPrev())->getName()) == username)
+		if ((((guestIterator)->getGuestPrev())->getName()) == username)
 		{
-			if ((((manager)->getGuestPrev())->getPassword()) == password)
+			if ((((guestIterator)->getGuestPrev())->getPassword()) == password)
 			{
 				userType = 3;
 				std::cout << "login Successful\n" << std::endl;
-				Guest = (manager)->getGuestPrev();
 				return true;
 			}
 		}
-		if (x <= (manager)->getGuestUserCounter())
+		if (x <= (guestIterator)->getGuestUserCounter())
 		{
-			(manager)->setGuestPrev(((manager)->getGuestPrev())->getNext());
+			(guestIterator)->setGuestPrev(((guestIterator)->getGuestPrev())->getNext());
 		}
 	}
 	std::cout << "login Failed" << std::endl;
@@ -80,16 +85,7 @@ void Login::logout()
 	userType = 0;
 }
 
-Admin* Login::getAdmin() const
-{
-	return admin;
-}
-GuestUser* Login::getGuest() const
-{
-	return Guest;
-}
-RegisteredUser* Login::getReg() const
+RegisteredUser* Login::getReg()
 {
 	return Reg;
 }
-

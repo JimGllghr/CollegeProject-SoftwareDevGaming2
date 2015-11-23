@@ -1,20 +1,20 @@
-#pragma once
-#include <iostream>
-#include "GuestUser.h"
-#include "RegisteredUser.h"
-#include "Admin.h"
-#include "book.h"
 #include "login.h"
-#include "UserManager.h"
+#include "AdminIterator.h"
+#include "GuestIterator.h"
+#include "BookIterator.h"
+#include "RegUserIterator.h"
 
 int idCount;
 bool loggedIn;
+AdminIterator* adminIterator;
+GuestIterator* guestIterator;
+RegUserIterator* regUserIterator;
+BookIterator* bookIterator;
 Login* login;
-UserManager* manager;
+
 void runAdmin()
 {
-	(manager)->reset();
-	std::cout << "\nAdmin Options \n(1) Log out \n(2) Delete Admin \n(3) Add Admin\n(4) Print Admins \n(5) Delete Registered User \n(6) Register user \n(7) Print Registered users \n(8) View my Details \n(9) Print Available books \n(10) Delete Book \n(11) Add Book \n(12) Register Guest user \n(13) Delete Guest user \n(14) print Guest Users";
+	std::cout << "\nAdmin Options \n(1) Log out \n(2) Delete Admin \n(3) Add Admin\n(4) Print Admins \n(5) Delete Registered User \n(6) Register user \n(7) Print Registered users \n(8) Print Available books \n(9) Delete Book \n(10) Add Book \n(11) Register Guest user \n(12) Delete Guest user \n(13) print Guest Users";
 	std::cout << std::endl << "Please enter desired option: ";
 	int input;
 	std::cin >> input;
@@ -33,7 +33,7 @@ void runAdmin()
 			std::cout << "please enter name of admin to Delete: ";
 			std::string name;
 			std::cin >> name;
-			(manager)->DeleteAdmin(name);
+			(adminIterator)->DeleteAdmin(name);
 			break;
 		}
 		case 3:
@@ -45,13 +45,13 @@ void runAdmin()
 			std::string password;
 			std::cin >> password;
 			idCount++;
-			(manager)->registerNewAdmin(name, password, idCount);
+			(adminIterator)->registerNewAdmin(name, password, idCount);
 			std::cout << "Admin " << name << " has been Registered\n";
 			break;
 		}
 		case 4:
 		{
-			(manager)->printAdmins();
+			(adminIterator)->printAdmins();
 			break;
 		}
 		case 5:
@@ -59,7 +59,7 @@ void runAdmin()
 			std::cout << "please enter name of Registered user to Delete: ";
 			std::string name;
 			std::cin >> name;
-			(manager)->DeleteRegUser(name);
+			(regUserIterator)->DeleteRegUser(name);
 			break;
 		}
 		case 6:
@@ -71,34 +71,29 @@ void runAdmin()
 			std::string password;
 			std::cin >> password;
 			idCount++;
-			(manager)->registerNewUser(name, password, idCount);
+			(regUserIterator)->registerNewUser(name, password, idCount);
 			std::cout << "User " << name << " has been Registered\n";
 			break;
 		}
 		case 7:
 		{
-			(manager)->printRegisteredUsers();
+			(regUserIterator)->printRegisteredUsers();
 			break;
 		}
 		case 8:
 		{
-			std::cout << (login)->getAdmin();
+			(bookIterator)->printAllBooks();
 			break;
 		}
 		case 9:
 		{
-			(manager)->printAllBooks();
-			break;
-		}
-		case 10:
-		{
 			std::cout << "please enter name of book to Remove: ";
 			std::string name;
 			std::cin >> name;
-			(manager)->removeBookName(name);
+			(bookIterator)->removeBookName(name);
 			break;
 		}
-		case 11:
+		case 10:
 		{
 			std::cout << "please enter title of new book: ";
 			std::string title;
@@ -112,16 +107,16 @@ void runAdmin()
 			std::cout << "please enter quantity of new book: ";
 			unsigned int quantity;
 			std::cin >> quantity;
-			(manager)->addBook(title, Author, ISBN, quantity);
+			(bookIterator)->addBook(title, Author, ISBN, quantity);
 			std::cout << "book " << title << " has been added\n";
 			break;
 		}
-		case 13:
+		case 11:
 		{
 			std::cout << "please enter name of Guest user to Delete: ";
 			std::string name;
 			std::cin >> name;
-			(manager)->DeletGuest(name);
+			(guestIterator)->DeletGuest(name);
 			break;
 		}
 		case 12:
@@ -133,13 +128,13 @@ void runAdmin()
 			std::string password;
 			std::cin >> password;
 			idCount++;
-			(manager)->registerNewGuest(name, password, idCount);
+			(guestIterator)->registerNewGuest(name, password, idCount);
 			std::cout << "Guest user " << name << " has been Registered\n";
 			break;
 		}
-		case 14:
+		case 13:
 		{
-			(manager)->printGuests();
+			(guestIterator)->printGuests();
 		}
 		std::cin.clear();
 	}
@@ -147,8 +142,7 @@ void runAdmin()
 
 void runRegisteredUser()
 {
-	(manager)->reset();
-	std::cout << "\nRegistered Users Options \n(1) Log out \n(2) print user Details \n(3) Print Available books \n(4) View current book Loans \n(5) loan book \n(6) Return book";
+	std::cout << "\nRegistered Users Options \n(1) Log out \n(2) Print Available books \n(3) loan book \n(4) Return book \n(5) Print Loaned Books \n(6) Search for book by name or Author \n(7) Search for book by ISBN";
 	std::cout << std::endl << "Please enter desired option: ";
 	std::cin.clear(); // clears the error flags
 				 // this line discards all the input waiting in the stream
@@ -161,27 +155,32 @@ void runRegisteredUser()
 	case 1:
 		(login)->logout();
 		loggedIn = false;
-		std::cout << "\nLogged out";
+		std::cout << "\nLogged out\n";
 		break;
 	case 2:
-		std::cout << (login)->getReg();
+		(bookIterator)->printAvailableBooks();
 		break;
 	case 3:
-		(manager)->printAvailableBooks();
+		((login)->getReg())->loanBook(bookIterator);
 		break;
 	case 4:
-		((login)->getReg())->printAllBooks();
+		((login)->getReg())->returnBook(bookIterator);
 		break;
 	case 5:
-		(manager)->setbookPrev((manager)->getbookFirst());
-		((login)->getReg())->LoanBook(manager);
+		((login)->getReg())->printLoanedBooks();
+		break;
+	case 6:
+		(bookIterator)->searchForBook();
+		break;
+	case 7:
+		(bookIterator)->searchForBookISBN();
 		break;
 	}
 }
 
 void runGuest()
 {
-	std::cout << "\nRegistered Users Options \n(1) Log out \n(2) print user Details \n (3) Print Available books";
+	std::cout << "\nRegistered Users Options \n(1) Log out \n(2) Print Available books \n(3) Search for book by name or Author \n(4) Search for book by ISBN";
 	std::cout << std::endl << "Please enter desired option: ";
 	int input;
 	std::cin >> input;
@@ -193,44 +192,53 @@ void runGuest()
 		std::cout << "\nLogged out";
 		break;
 	case 2:
-		std::cout << (login)->getGuest();
+		(bookIterator)->printAvailableBooks();
 		break;
 	case 3:
-		(manager)->printAvailableBooks();
+		(bookIterator)->searchForBook();
+		break;
+	case 4:
+		(bookIterator)->searchForBookISBN();
 		break;
 	}
 }
 
 void initiate()
 {
-	manager = new UserManager();
-	login = new Login(manager);
+	adminIterator = new AdminIterator();
+	guestIterator = new GuestIterator();
+	regUserIterator = new RegUserIterator();
+	bookIterator = new BookIterator();
+
+	login = new Login(adminIterator, guestIterator, regUserIterator, bookIterator);
 	idCount = 10000;
-	(manager)->setRegUserCounter(0);
-	(manager)->setGuestUserCounter(0);
-	(manager)->setadminCounter(0);
 
-	(manager)->registerNewUser("james", "sandwich", 26622);
-	(manager)->registerNewUser("Clara", "blueberry", 12233);
-	(manager)->registerNewUser("Amy", "qwerty", 14563);
+	(regUserIterator)->setRegUserCounter(0);
+	(guestIterator)->setGuestUserCounter(0);
+	(adminIterator)->setadminCounter(0);
+	(bookIterator)->setbookCounter(0);
 
-	(manager)->registerNewUser("Clara", "blueberry", 17823);
-	(manager)->registerNewUser("Amy", "qwerty", 12223);
-	(manager)->registerNewUser("James", "Sandwich", 12667);
+	(regUserIterator)->registerNewUser("james", "sandwich", 26622);
+	(regUserIterator)->registerNewUser("Clara", "blueberry", 12233);
+	(regUserIterator)->registerNewUser("Amy", "qwerty", 14563);
 
-	(manager)->registerNewAdmin("jim", "qwerty", 12923);
-	(manager)->registerNewAdmin("sam", "qwerty", 12443);
-	(manager)->registerNewAdmin("owen", "qwerty", 15623);
-	(manager)->registerNewAdmin("admin", "admin", 12323);
+	(regUserIterator)->registerNewUser("Clara", "blueberry", 17823);
+	(regUserIterator)->registerNewUser("Amy", "qwerty", 12223);
+	(regUserIterator)->registerNewUser("James", "Sandwich", 12667);
+
+	(adminIterator)->registerNewAdmin("jim", "qwerty", 12923);
+	(adminIterator)->registerNewAdmin("sam", "qwerty", 12443);
+	(adminIterator)->registerNewAdmin("owen", "qwerty", 15623);
+	(adminIterator)->registerNewAdmin("admin", "admin", 12323);
 	
-	(manager)->addBook("Andy Weir", "The Martian", 97808, 2);
-	(manager)->addBook("Susan Collins", "The Hunger Games", 23345, 1);
-	(manager)->addBook("Ernest Cline", "Ready Player one", 65321, 3);
-	(manager)->addBook("Ernest Cline", "Ready", 65321, 1);
+	(bookIterator)->addBook("Andy Weir", "The Martian", 97808, 2);
+	(bookIterator)->addBook("Susan Collins", "The Hunger Games", 23345, 1);
+	(bookIterator)->addBook("Ernest Cline", "Ready Player one", 65321, 3);
+	(bookIterator)->addBook("Ernest Cline", "Ready", 65321, 1);
 
-	(manager)->registerNewGuest("Tom", "qwerty", 12223);
-	(manager)->registerNewGuest("cian", "qwerty", 12223);
-	(manager)->registerNewGuest("kerry", "qwerty", 12223);
+	(guestIterator)->registerNewGuest("Tom", "qwerty", 12223);
+	(guestIterator)->registerNewGuest("cian", "qwerty", 12223);
+	(guestIterator)->registerNewGuest("kerry", "qwerty", 12223);
 }
 
 int main()

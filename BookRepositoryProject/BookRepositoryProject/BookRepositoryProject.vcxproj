@@ -71,21 +71,29 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Admin.cpp" />
+    <ClCompile Include="AdminIterator.cpp" />
     <ClCompile Include="book.cpp" />
+    <ClCompile Include="BookIterator.cpp" />
     <ClCompile Include="bookRepositoryMain.cpp" />
+    <ClCompile Include="GuestIterator.cpp" />
     <ClCompile Include="GuestUser.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="RegisteredUser.cpp" />
+    <ClCompile Include="RegUserIterator.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="UserManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Admin.h" />
+    <ClInclude Include="AdminIterator.h" />
     <ClInclude Include="Book.h" />
+    <ClInclude Include="BookIterator.h" />
     <ClInclude Include="bookRepositoryMain.h" />
+    <ClInclude Include="GuestIterator.h" />
     <ClInclude Include="GuestUser.h" />
     <ClInclude Include="Login.h" />
     <ClInclude Include="RegisteredUser.h" />
+    <ClInclude Include="RegUserIterator.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="UserManager.h" />
   </ItemGroup>
