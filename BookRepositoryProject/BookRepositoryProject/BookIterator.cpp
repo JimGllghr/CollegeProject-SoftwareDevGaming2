@@ -142,10 +142,20 @@ void BookIterator::searchForBook()
 	bookPrev = bookFirst;
 	std::cout << "Please Enter Name or Author: ";
 	std::string name;
-	std::cin >> name;
+	std::getline(std::cin, name);
+	std::getline(std::cin, name);
+
 	for (int x = 1; x <= bookCounter; x++)
 	{
-		if (((bookPrev)->getTitle() == name) || (bookPrev)->getAuthor() == name)
+		if ((bookPrev)->getTitle() == name)
+		{
+			std::cout << bookPrev;
+			if (x < bookCounter)
+			{
+				bookPrev = (bookPrev)->getNext();
+			}
+		}
+		if ((bookPrev)->getAuthor() == name)
 		{
 			std::cout << bookPrev;
 			if (x < bookCounter)

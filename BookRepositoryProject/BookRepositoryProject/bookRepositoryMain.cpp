@@ -25,7 +25,7 @@ void runAdmin()
 		{
 			(login)->logout();
 			loggedIn = false;
-			std::cout << "\nLogged out";
+			std::cout << "\nLogged out\n";
 			break;
 		}
 		case 2:
@@ -89,7 +89,8 @@ void runAdmin()
 		{
 			std::cout << "please enter name of book to Remove: ";
 			std::string name;
-			std::cin >> name;
+			std::getline(std::cin, name);
+			std::getline(std::cin, name);
 			(bookIterator)->removeBookName(name);
 			break;
 		}
@@ -144,10 +145,6 @@ void runRegisteredUser()
 {
 	std::cout << "\nRegistered Users Options \n(1) Log out \n(2) Print Available books \n(3) loan book \n(4) Return book \n(5) Print Loaned Books \n(6) Search for book by name or Author \n(7) Search for book by ISBN";
 	std::cout << std::endl << "Please enter desired option: ";
-	std::cin.clear(); // clears the error flags
-				 // this line discards all the input waiting in the stream
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	std::cout << std::endl << "\nPlease enter desired option: ";
 	int input;
 	std::cin >> input;
 	switch (input)
@@ -189,7 +186,7 @@ void runGuest()
 	case 1:
 		(login)->logout();
 		loggedIn = false;
-		std::cout << "\nLogged out";
+		std::cout << "\nLogged out\n";
 		break;
 	case 2:
 		(bookIterator)->printAvailableBooks();
@@ -232,9 +229,9 @@ void initiate()
 	(adminIterator)->registerNewAdmin("admin", "admin", 12323);
 	
 	(bookIterator)->addBook("Andy Weir", "The Martian", 97808, 2);
-	(bookIterator)->addBook("Susan Collins", "The Hunger Games", 23345, 1);
+	(bookIterator)->addBook("Suzanne Collins", "The Hunger Games", 23345, 1);
+	(bookIterator)->addBook("Suzanne Collins", "The Hunger Games: Catching Fire", 23345, 3);
 	(bookIterator)->addBook("Ernest Cline", "Ready Player one", 65321, 3);
-	(bookIterator)->addBook("Ernest Cline", "Ready", 65321, 1);
 
 	(guestIterator)->registerNewGuest("Tom", "qwerty", 12223);
 	(guestIterator)->registerNewGuest("cian", "qwerty", 12223);

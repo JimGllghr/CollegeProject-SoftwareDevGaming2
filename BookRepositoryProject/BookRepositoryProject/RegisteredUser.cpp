@@ -29,7 +29,8 @@ void RegisteredUser::loanBook(BookIterator* library)
 	(loanedBooks)->reset();
 	std::cout << "please enter title of book to take on loan: ";
 	std::string name;
-	std::cin >> name;
+	std::getline(std::cin, name);
+	std::getline(std::cin, name);
 	for (int x = 1; x <= (library)->getbookCounter(); x++)
 	{
 		if ((((library)->getbookPrev())->getTitle()) == name)
@@ -56,7 +57,8 @@ void RegisteredUser::returnBook(BookIterator* library)
 	(loanedBooks)->setbookPrev((loanedBooks)->getbookFirst());
 	std::cout << "please enter title of book to Return: ";
 	std::string name;
-	std::cin >> name;
+	std::getline(std::cin, name);
+	std::getline(std::cin, name);
 	for (int x = 1; x <= (loanedBooks)->getbookCounter(); x++)
 	{
 		if ((((loanedBooks)->getbookPrev())->getTitle()) == name)

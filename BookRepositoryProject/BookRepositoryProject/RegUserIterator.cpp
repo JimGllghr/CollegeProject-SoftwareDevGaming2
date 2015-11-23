@@ -25,6 +25,13 @@ RegisteredUser* RegUserIterator::getRegPrev()
 	return RegPrev;
 }
 
+
+std::ostream& operator<<(std::ostream& out, RegisteredUser* user)
+{
+	std::cout << "\nName: " << (user)->getName() << " ID: " << (user)->getID() << std::endl;
+	return out;
+}
+
 void RegUserIterator::registerNewUser(std::string nName, std::string password, unsigned int ID)
 {
 	reset();
@@ -95,11 +102,6 @@ void RegUserIterator::printRegisteredUsers()
 			RegPrev = (RegPrev)->getNext();
 		}
 	}
-}
-std::ostream& operator<<(std::ostream& out, RegisteredUser* user)
-{
-	std::cout << "\nName: " << (user)->getName() << " ID: " << (user)->getID() << std::endl;
-	return out;
 }
 
 void RegUserIterator::reset()

@@ -82,6 +82,7 @@ unsigned int Login::getUserType() const
 
 void Login::logout()
 {
+	system("cls");
 	userType = 0;
 }
 
