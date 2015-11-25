@@ -1,7 +1,6 @@
 #ifndef nuser
 #define nuser
 #include <string>
-
 #include <iostream>
 
 class user

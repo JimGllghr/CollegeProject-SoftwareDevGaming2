@@ -1,4 +1,4 @@
-#include "book.h";
+#include "book.h"
 
 void book::setAuthor(std::string nAuthor)
 {
@@ -50,9 +50,20 @@ book* book::getPrev() const
 	return prev;
 }
 
-book::book(std::string nAuthor, std::string nTitle, unsigned int nISBN)
+book::book(std::string nAuthor, std::string nTitle, unsigned int nISBN, unsigned int nQuantity)
 {
 	author = nAuthor;
 	title = nTitle;
 	ISBN = nISBN;
+	quantity = nQuantity;
+}
+
+void book::setQuantity(unsigned int num)
+{
+	quantity = num;
+}
+
+unsigned int book::getQuantity() const
+{
+	return quantity;
 }

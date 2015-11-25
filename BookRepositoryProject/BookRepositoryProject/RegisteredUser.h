@@ -1,9 +1,11 @@
+#pragma once
 #ifndef nRegisteredUser
 #define nRegisteredUser
-#include <string>
-#include "User.h"
-
 #include <iostream>
+#include <string>
+#include "user.h"
+#include "book.h"
+#include "BookIterator.h"
 
 class RegisteredUser : public user
 {
@@ -16,10 +18,15 @@ public:
 	RegisteredUser* getNext() const;
 	RegisteredUser* getPrev() const;
 
-private:
+	void loanBook(BookIterator* library);
+	void returnBook(BookIterator* library);
+	void printLoanedBooks();
 
+private:
 	RegisteredUser* next;
 	RegisteredUser* prev;
+
+	BookIterator* loanedBooks;
 };
 
 #endif

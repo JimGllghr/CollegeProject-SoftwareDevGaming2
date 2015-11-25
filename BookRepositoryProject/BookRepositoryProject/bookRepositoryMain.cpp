@@ -1,469 +1,20 @@
-#include <iostream>
-#include "GuestUser.h"
-#include "RegisteredUser.h"
-#include "Admin.h"
-#include "bookRepositoryMain.h"
-#include "book.h"
-
-int RegUserCounter;
-int currentRegUser;
-int GuestUserCounter;
-int currentGuestUser;
-int adminCounter;
-int currentAdmin;
-int bookCounter;
+#include "login.h"
+#include "AdminIterator.h"
+#include "GuestIterator.h"
+#include "BookIterator.h"
+#include "RegUserIterator.h"
 
 int idCount;
-int userType;
-
 bool loggedIn;
-
-Admin* adminFirst;
-Admin* adminPrev;
-GuestUser* GuestNext;
-GuestUser* GuestPrev;
-RegisteredUser* RegFirst;
-RegisteredUser* RegPrev;
-book* bookFirst;
-book* bookPrev;
-
-Admin* admin;
-GuestUser* Guest;
-RegisteredUser* Reg;
-
-void registerNewUser(std::string nName, std::string password, unsigned int ID)
-{
-	RegisteredUser* registeredNewUser = new RegisteredUser(nName, password, ID);
-	if (RegUserCounter > 0)
-	{
-		(registeredNewUser)->setPrev(RegPrev);
-		(RegPrev)->setNext(registeredNewUser);
-	}
-	else
-	{
-		RegFirst = registeredNewUser;
-	}
-	currentRegUser++;
-	RegUserCounter++;
-	RegPrev = registeredNewUser;
-}
-
-void DeleteRegUser(std::string nName)
-{
-	int deletedUsers = 0;
-	RegPrev = RegFirst;
-	for (int x = 1; x <= RegUserCounter; x++)
-	{
-		if (((RegPrev)->getName()) == nName)
-		{
-			if (x == 1)
-			{
-				RegFirst = (RegFirst)->getNext();
-			}
-			else
-			{
-				((RegPrev)->getPrev())->setNext((RegPrev)->getNext());
-			}
-			if (x < (RegUserCounter - deletedUsers) && x > 1)
-			{
-				((RegPrev)->getNext())->setPrev((RegPrev)->getPrev());
-			}
-			RegisteredUser* tempPtr = RegPrev;
-			if (x != 1)
-			{
-				RegPrev = (RegPrev)->getPrev();
-			}
-			else
-			{
-				RegPrev = (RegPrev)->getNext();;
-			}
-			delete tempPtr;
-			deletedUsers += 1;
-		}
-		if (x <= RegUserCounter- (deletedUsers+1))
-		{
-			RegPrev = (RegPrev)->getNext();
-		}
-	}
-	std::cout << "Registered Users Deleted: " << deletedUsers;
-	RegUserCounter -= deletedUsers;
-}
-
-std::ostream& operator<<(std::ostream& out, RegisteredUser* user)
-{
-	std::cout << "\nName: " << (user)->getName() << " ID: " << (user)->getID() << std::endl;
-	return out;
-}
-
-void printRegisteredUsers()
-{
-	RegPrev = RegFirst;
-	std::cout << "Registered Users\n";
-	for (int x = 1; x <= RegUserCounter; x++)
-	{
-		std::cout << RegPrev;
-		if (x < RegUserCounter)
-		{
-			RegPrev = (RegPrev)->getNext();
-		}
-	}
-}
-
-void resetRegisteredUsers()
-{
-	RegPrev = RegFirst;
-	for (int x = 1; x <= RegUserCounter; x++)
-	{
-		if (x < RegUserCounter)
-		{
-			RegPrev = (RegPrev)->getNext();
-		}
-	}
-}
-
-void registerNewAdmin(std::string nName, std::string password, unsigned int ID)
-{
-	Admin* registeredNewAdmin = new Admin(nName, password, ID);
-	if (adminCounter > 0)
-	{
-		(registeredNewAdmin)->setPrev(adminPrev);
-		(adminPrev)->setNext(registeredNewAdmin);
-	}
-	else
-	{
-		adminFirst = registeredNewAdmin;
-	}
-	adminCounter++;
-	currentAdmin++;
-	adminPrev = registeredNewAdmin;
-}
-
-void DeleteAdmin(std::string nName)
-{
-	int deletedUsers = 0;
-	adminPrev = adminFirst;
-	for (int x = 1; x < adminCounter; x++)
-	{
-		if (((adminPrev)->getName()) == nName)
-		{
-			if (x == 1)
-			{
-				adminFirst = (adminFirst)->getNext();
-			}
-			else
-			{
-				((adminPrev)->getPrev())->setNext((adminPrev)->getNext());
-			}
-			if (x < (adminCounter - deletedUsers) && x > 1)
-			{
-				((adminPrev)->getNext())->setPrev((adminPrev)->getPrev());
-			}
-			Admin* tempPtr = adminPrev;
-			if (x != 1)
-			{
-				adminPrev = (adminPrev)->getPrev();
-			}
-			else
-			{
-				adminPrev = (adminPrev)->getNext();;
-			}
-			delete tempPtr;
-			deletedUsers += 1;
-		}
-		if (x <= adminCounter - (deletedUsers + 1))
-		{
-			adminPrev = (adminPrev)->getNext();
-		}
-	}
-	std::cout << "\nAdmins Deleted: " << deletedUsers << std::endl;
-	adminCounter -= deletedUsers;
-}
-
-std::ostream& operator<<(std::ostream& out, Admin* user)
-{
-	std::cout << "\nName: " << (user)->getName() << " ID: " << (user)->getID() << std::endl;
-	return out;
-}
-
-void printAdmins()
-{
-	adminPrev = adminFirst;
-	std::cout << "Admins\n";
-	for (int x = 1; x <= adminCounter; x++)
-	{
-		std::cout << adminPrev;
-		if (x <= adminCounter)
-		{
-			adminPrev = (adminPrev)->getNext();
-		}
-	}
-}
-
-void resetAdmins()
-{
-	adminPrev = adminFirst;
-	for (int x = 1; x <= adminCounter; x++)
-	{
-		if (x < adminCounter)
-		{
-			adminPrev = (adminPrev)->getNext();
-		}
-	}
-}
-
-void registerNewGuest(std::string nName, std::string password, unsigned int ID)
-{
-	GuestUser* registeredNewGuest = new GuestUser(nName, password, ID);
-	if (GuestUserCounter > 0)
-	{
-		(registeredNewGuest)->setPrev(GuestPrev);
-		(GuestPrev)->setNext(registeredNewGuest);
-	}
-	else
-	{
-		GuestNext = registeredNewGuest;
-	}
-	GuestUserCounter++;
-	GuestPrev = registeredNewGuest;
-}
-
-void DeletGuest(std::string nName)
-{
-	int deletedUsers = 0;
-	GuestPrev = GuestNext;
-	for (int x = 1; x < GuestUserCounter; x++)
-	{
-		if (((GuestPrev)->getName()) == nName)
-		{
-			if (x == 1)
-			{
-				GuestNext = (GuestNext)->getNext();
-			}
-			else
-			{
-				((GuestPrev)->getPrev())->setNext((GuestPrev)->getNext());
-			}
-			if (x < (GuestUserCounter - deletedUsers) && x > 1)
-			{
-				((GuestPrev)->getNext())->setPrev((GuestPrev)->getPrev());
-			}
-			GuestUser* tempPtr = GuestPrev;
-			if (x != 1)
-			{
-				GuestPrev = (GuestPrev)->getPrev();
-			}
-			else
-			{
-				GuestPrev = (GuestPrev)->getNext();;
-			}
-			delete tempPtr;
-			deletedUsers += 1;
-		}
-		if (x <= GuestUserCounter - (deletedUsers + 1))
-		{
-			GuestPrev = (GuestPrev)->getNext();
-		}
-	}
-	std::cout << "\nGuests Deleted: " << deletedUsers << std::endl;
-	GuestUserCounter -= deletedUsers;
-}
-
-std::ostream& operator<<(std::ostream& out, GuestUser* user)
-{
-	std::cout << "\nName: " << (user)->getName() << " ID: " << (user)->getID() << std::endl;
-	return out;
-}
-
-void printGuests()
-{
-	GuestNext = GuestNext;
-	std::cout << "\nGuest Users\n";
-	for (int x = 1; x <= GuestUserCounter; x++)
-	{
-		std::cout << GuestPrev;
-		if (x <= GuestUserCounter)
-		{
-			GuestNext = (GuestNext)->getNext();
-		}
-	}
-}
-
-void resetGuests()
-{
-	GuestNext = GuestNext;
-	for (int x = 1; x <= GuestUserCounter; x++)
-	{
-		if (x < GuestUserCounter)
-		{
-			GuestNext = (GuestNext)->getNext();
-		}
-	}
-}
-
-void addBook(std::string nAuthor, std::string nTitle, unsigned int nISBN)
-{
-	book* newBook = new book(nAuthor, nTitle, nISBN);
-	if (bookCounter > 0)
-	{
-		(newBook)->setPrev(bookPrev);
-		(bookPrev)->setNext(newBook);
-	}
-	else
-	{
-		bookFirst = newBook;
-	}
-	bookCounter++;
-	bookPrev = newBook;
-}
-
-void removeBookName(std::string nName)
-{
-	int deletedUsers = 0;
-	bookPrev = bookFirst;
-	for (int x = 1; x <= bookCounter; x++)
-	{
-		if (((bookPrev)->getTitle()) == nName)
-		{
-			if (x == 1)
-			{
-				bookFirst = (bookFirst)->getNext();
-			}
-			else
-			{
-				((bookPrev)->getPrev())->setNext((bookPrev)->getNext());
-			}
-			if (x < (bookCounter - deletedUsers) && x > 1)
-			{
-				((bookPrev)->getNext())->setPrev((bookPrev)->getPrev());
-			}
-			book* tempPtr = bookPrev;
-			if (x != 1)
-			{
-				bookPrev = (bookPrev)->getPrev();
-			}
-			else
-			{
-				bookPrev = (bookPrev)->getNext();;
-			}
-			delete tempPtr;
-			deletedUsers += 1;
-		}
-		if (x <= bookCounter - (deletedUsers+1))
-		{
-			bookPrev = (bookPrev)->getNext();
-		}
-	}
-	std::cout << "books Deleted: " << deletedUsers;
-	bookCounter -= deletedUsers;
-}
-
-std::ostream& operator<<(std::ostream& out, book* Book)
-{
-	std::cout << "\nTitle: " << (Book)->getTitle() << " Author: " << (Book)->getAuthor() << " ISBN: " << (Book)->getISBN() << std::endl;
-	return out;
-}
-
-void printAllBooks()
-{
-	bookPrev = bookFirst;
-	std::cout << "Books\n";
-	for (int x = 1; x <= bookCounter; x++)
-	{
-		std::cout << bookPrev;
-		if (x < bookCounter)
-		{
-			bookPrev = (bookPrev)->getNext();
-		}
-	}
-}
-
-void resetbooks()
-{
-	bookPrev = bookFirst;
-	for (int x = 1; x <= RegUserCounter; x++)
-	{
-		if (x < bookCounter)
-		{
-			bookPrev = (bookPrev)->getNext();
-		}
-	}
-}
-
-bool login()
-{
-	RegPrev = RegFirst;
-	std::cout << "Please enter Username: ";
-	std::string username;
-	std::cin >> username;
-	std::cout << "Please enter Password: ";
-	std::string password;
-	std::cin >> password;
-
-	for (int x = 1; x <= RegUserCounter; x++)
-	{
-		if (((RegPrev)->getName()) == username)
-		{
-			if (((RegPrev)->getPassword()) == password)
-			{
-				userType = 2;
-				std::cout << "login Successful\n"<< std::endl;
-				Reg = RegPrev;
-				return true;
-			}
-		}
-		if (x <= RegUserCounter)
-		{
-			RegPrev = (RegPrev)->getNext();
-		}
-	}
-
-	adminPrev = adminFirst;
-	for (int x = 1; x <= adminCounter; x++)
-	{
-		if (((adminPrev)->getName()) == username)
-		{
-			if (((adminPrev)->getPassword()) == password)
-			{
-				userType = 1;
-				std::cout << "login Successful\n" << std::endl;
-				admin = adminPrev;
-				return true;
-			}
-		}
-		if (x <= adminCounter)
-		{
-			adminPrev = (adminPrev)->getNext();
-		}
-	}
-
-	GuestPrev = GuestNext;
-	for (int x = 1; x <= GuestUserCounter; x++)
-	{
-		if (((GuestPrev)->getName()) == username)
-		{
-			if (((GuestPrev)->getPassword()) == password)
-			{
-				userType = 3;
-				std::cout << "login Successful\n" << std::endl;
-				Guest = GuestPrev;
-				return true;
-			}
-		}
-		if (x <= GuestUserCounter)
-		{
-			GuestPrev = (GuestPrev)->getNext();
-		}
-	}
-
-	std::cout << "login Failed" << std::endl;
-	return false;
-}
+AdminIterator* adminIterator;
+GuestIterator* guestIterator;
+RegUserIterator* regUserIterator;
+BookIterator* bookIterator;
+Login* login;
 
 void runAdmin()
 {
-	resetAdmins();
-	resetRegisteredUsers();
-	std::cout << "\nAdmin Options \n(1) Log out \n(2) Delete Admin \n(3) Add Admin\n(4) Print Admins \n(5) Delete Registered User \n(6) Register user \n(7) Print Registered users \n(8) View my Details \n(9) Print Available books \n(10) Delete Book \n(11) Add Book \n(12) Register Guest user \n(13) Delete Guest user \n(14) print Guest Users";
+	std::cout << "\nAdmin Options \n(1) Log out \n(2) Delete Admin \n(3) Add Admin\n(4) Print Admins \n(5) Delete Registered User \n(6) Register user \n(7) Print Registered users \n(8) Print Available books \n(9) Delete Book \n(10) Add Book \n(11) Register Guest user \n(12) Delete Guest user \n(13) print Guest Users";
 	std::cout << std::endl << "Please enter desired option: ";
 	int input;
 	std::cin >> input;
@@ -472,21 +23,24 @@ void runAdmin()
 	{
 		case 1:
 		{
-			userType = 0;
+			system("cls");
+			(login)->logout();
 			loggedIn = false;
-			std::cout << "\nLogged out";
+			std::cout << "\nLogged out\n";
 			break;
 		}
 		case 2:
 		{
+			system("cls");
 			std::cout << "please enter name of admin to Delete: ";
 			std::string name;
 			std::cin >> name;
-			DeleteAdmin(name);
+			(adminIterator)->DeleteAdmin(name);
 			break;
 		}
 		case 3:
 		{
+			system("cls");
 			std::cout << "please enter name of new admin: ";
 			std::string name;
 			std::cin >> name;
@@ -494,25 +48,28 @@ void runAdmin()
 			std::string password;
 			std::cin >> password;
 			idCount++;
-			registerNewAdmin(name, password, idCount);
+			(adminIterator)->registerNewAdmin(name, password, idCount);
 			std::cout << "Admin " << name << " has been Registered\n";
 			break;
 		}
 		case 4:
 		{
-			printAdmins();
+			system("cls");
+			(adminIterator)->printAdmins();
 			break;
 		}
 		case 5:
 		{
+			system("cls");
 			std::cout << "please enter name of Registered user to Delete: ";
 			std::string name;
 			std::cin >> name;
-			DeleteRegUser(name);
+			(regUserIterator)->DeleteRegUser(name);
 			break;
 		}
 		case 6:
 		{
+			system("cls");
 			std::cout << "please enter name of new user: ";
 			std::string name;
 			std::cin >> name;
@@ -520,35 +77,35 @@ void runAdmin()
 			std::string password;
 			std::cin >> password;
 			idCount++;
-			registerNewUser(name, password, idCount);
+			(regUserIterator)->registerNewUser(name, password, idCount);
 			std::cout << "User " << name << " has been Registered\n";
 			break;
 		}
 		case 7:
 		{
-			printRegisteredUsers();
+			system("cls");
+			(regUserIterator)->printRegisteredUsers();
 			break;
 		}
 		case 8:
 		{
-			std::cout << admin;
+			system("cls");
+			(bookIterator)->printAllBooks();
 			break;
 		}
 		case 9:
 		{
-			printAllBooks();
+			system("cls");
+			std::cout << "please enter name of book to Remove: ";
+			std::string name;
+			std::getline(std::cin, name);
+			std::getline(std::cin, name);
+			(bookIterator)->removeBookName(name);
 			break;
 		}
 		case 10:
 		{
-			std::cout << "please enter name of book to Remove: ";
-			std::string name;
-			std::cin >> name;
-			removeBookName(name);
-			break;
-		}
-		case 11:
-		{
+			system("cls");
 			std::cout << "please enter title of new book: ";
 			std::string title;
 			std::cin >> title;
@@ -558,20 +115,25 @@ void runAdmin()
 			std::cout << "please enter ISBN of new book: ";
 			unsigned int ISBN;
 			std::cin >> ISBN;
-			registerNewAdmin(title, Author, ISBN);
+			std::cout << "please enter quantity of new book: ";
+			unsigned int quantity;
+			std::cin >> quantity;
+			(bookIterator)->addBook(title, Author, ISBN, quantity);
 			std::cout << "book " << title << " has been added\n";
 			break;
 		}
-		case 13:
+		case 11:
 		{
+			system("cls");
 			std::cout << "please enter name of Guest user to Delete: ";
 			std::string name;
 			std::cin >> name;
-			DeletGuest(name);
+			(guestIterator)->DeletGuest(name);
 			break;
 		}
 		case 12:
 		{
+			system("cls");
 			std::cout << "please enter name of new Guest user: ";
 			std::string name;
 			std::cin >> name;
@@ -579,133 +141,152 @@ void runAdmin()
 			std::string password;
 			std::cin >> password;
 			idCount++;
-			registerNewGuest(name, password, idCount);
+			(guestIterator)->registerNewGuest(name, password, idCount);
 			std::cout << "Guest user " << name << " has been Registered\n";
 			break;
 		}
-		case 14:
+		case 13:
 		{
-			printGuests();
-			break;
+			system("cls");
+			(guestIterator)->printGuests();
 		}
-
+		std::cin.clear();
 	}
 }
 
 void runRegisteredUser()
 {
-	resetAdmins();
-	resetRegisteredUsers();
-	std::cout << "\nRegistered Users Options \n(1) Log out \n(2) print user Details \n (3)Print Available books";
-	std::cout << std::endl << "Please enter desired option: ";
-	int input;
-	std::cin >> input;
-	switch (input) 
-	{
-	case 1:
-		userType = 0;
-		loggedIn = false; 
-		std::cout << "\nLogged out";
-		break;
-	case 2:
-		std::cout << Reg;
-		break;
-	case 3:
-		printAllBooks();
-		break;
-	}
-}
-
-void runGuest()
-{
-	resetAdmins();
-	resetRegisteredUsers();
-	std::cout << "\nRegistered Users Options \n(1) Log out \n(2) print user Details \n (3)Print Available books";
+	std::cout << "\nRegistered Users Options \n(1) Log out \n(2) Print Available books \n(3) loan book \n(4) Return book \n(5) Print Loaned Books \n(6) Search for book by name or Author \n(7) Search for book by ISBN";
 	std::cout << std::endl << "Please enter desired option: ";
 	int input;
 	std::cin >> input;
 	switch (input)
 	{
 	case 1:
-		userType = 0;
+		system("cls");
+		(login)->logout();
 		loggedIn = false;
-		std::cout << "\nLogged out";
+		std::cout << "\nLogged out\n";
 		break;
 	case 2:
-		std::cout << Reg;
+		system("cls");
+		(bookIterator)->printAvailableBooks();
 		break;
 	case 3:
-		printAllBooks();
+		system("cls");
+		((login)->getReg())->loanBook(bookIterator);
+		break;
+	case 4:
+		system("cls");
+		((login)->getReg())->returnBook(bookIterator);
+		break;
+	case 5:
+		system("cls");
+		((login)->getReg())->printLoanedBooks();
+		break;
+	case 6:
+		system("cls");
+		(bookIterator)->searchForBook();
+		break;
+	case 7:
+		system("cls");
+		(bookIterator)->searchForBookISBN();
+		break;
+	}
+}
+
+void runGuest()
+{
+	std::cout << "\nRegistered Users Options \n(1) Log out \n(2) Print Available books \n(3) Search for book by name or Author \n(4) Search for book by ISBN";
+	std::cout << std::endl << "Please enter desired option: ";
+	int input;
+	std::cin >> input;
+	switch (input)
+	{
+	case 1:
+		system("cls");
+		(login)->logout();
+		loggedIn = false;
+		std::cout << "\nLogged out\n";
+		break;
+	case 2:
+		system("cls");
+		(bookIterator)->printAvailableBooks();
+		break;
+	case 3:
+		system("cls");
+		(bookIterator)->searchForBook();
+		break;
+	case 4:
+		system("cls");
+		(bookIterator)->searchForBookISBN();
 		break;
 	}
 }
 
 void initiate()
 {
+	adminIterator = new AdminIterator();
+	guestIterator = new GuestIterator();
+	regUserIterator = new RegUserIterator();
+	bookIterator = new BookIterator();
+
+	login = new Login(adminIterator, guestIterator, regUserIterator, bookIterator);
 	idCount = 10000;
-	RegUserCounter = 0;
-	GuestUserCounter = 0;
-	adminCounter = 0;
-	currentAdmin = 0;
-	currentRegUser = 0;
-	currentGuestUser = 0;
 
-	registerNewUser("james", "sandwich", 26622);
-	registerNewUser("Clara", "blueberry", 12233);
-	registerNewUser("Amy", "qwerty", 14563);
+	(regUserIterator)->setRegUserCounter(0);
+	(guestIterator)->setGuestUserCounter(0);
+	(adminIterator)->setadminCounter(0);
+	(bookIterator)->setbookCounter(0);
 
-	registerNewUser("Clara", "blueberry", 17823);
-	registerNewUser("Amy", "qwerty", 12223);
-	registerNewUser("James", "Sandwich", 12667);
+	(regUserIterator)->registerNewUser("james", "sandwich", 26622);
+	(regUserIterator)->registerNewUser("Clara", "blueberry", 12233);
+	(regUserIterator)->registerNewUser("Amy", "qwerty", 14563);
 
-	registerNewAdmin("jim", "qwerty", 12923);
-	registerNewAdmin("sam", "qwerty", 12443);
-	registerNewAdmin("owen", "qwerty", 15623);
-	registerNewAdmin("admin", "admin", 12323);
+	(regUserIterator)->registerNewUser("Clara", "blueberry", 17823);
+	(regUserIterator)->registerNewUser("Amy", "qwerty", 12223);
+	(regUserIterator)->registerNewUser("James", "Sandwich", 12667);
+
+	(adminIterator)->registerNewAdmin("jim", "qwerty", 12923);
+	(adminIterator)->registerNewAdmin("sam", "qwerty", 12443);
+	(adminIterator)->registerNewAdmin("owen", "qwerty", 15623);
+	(adminIterator)->registerNewAdmin("admin", "admin", 12323);
 	
-	addBook("The Martian", "Andy Weir", 97808);
-	addBook("The Hunger Games", "Susan Collins", 23345);
-	addBook("Ready Player one", "Ernest Cline", 65321);
-	addBook("The Martian", "Andy Weir", 97808);
-	addBook("The Martian", "Andy Weir", 97808);
-	addBook("The Martian", "Andy Weir", 97808);
-	addBook("The Martian", "Andy Weir", 97808);
-	addBook("The Martian", "Andy Weir", 97808);
-	addBook("The Martian", "Andy Weir", 97808);
-	addBook("The Martian", "Andy Weir", 97808);
+	(bookIterator)->addBook("Andy Weir", "The Martian", 97808, 2);
+	(bookIterator)->addBook("Suzanne Collins", "The Hunger Games", 23345, 1);
+	(bookIterator)->addBook("Suzanne Collins", "The Hunger Games: Catching Fire", 23345, 3);
+	(bookIterator)->addBook("Ernest Cline", "Ready Player one", 65321, 3);
 
-	registerNewGuest("Tom", "qwerty", 12223);
-	registerNewGuest("cian", "qwerty", 12223);
-	registerNewGuest("kerry", "qwerty", 12223);
+	(guestIterator)->registerNewGuest("Tom", "qwerty", 12223);
+	(guestIterator)->registerNewGuest("cian", "qwerty", 12223);
+	(guestIterator)->registerNewGuest("kerry", "qwerty", 12223);
 }
 
 int main()
 {
-	initiate();
-
 	bool running = true;
+	initiate();
 	while (running)
 	{
 		loggedIn = false;
 		while (!(loggedIn))
 		{
-			loggedIn = login();
+			loggedIn = (login)->login();
 		}
-		while (userType == 1)
+		while ((login)->getUserType() == 1)
 		{
 			runAdmin();
 		}
 		
-		while (userType == 2)
+		while ((login)->getUserType() == 2)
 		{
 			runRegisteredUser();
 		}
 
-		while (userType == 3)
+		while ((login)->getUserType() == 3)
 		{
 			runGuest();
 		}
 	}
-
 	system("pause");
 }

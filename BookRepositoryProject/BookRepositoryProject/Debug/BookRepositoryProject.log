@@ -1,10 +1,16 @@
+<<<<<<< HEAD
 ﻿Build started 18/11/2015 17:15:41.
      1>Project "C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\BookRepositoryProject\BookRepositoryProject.vcxproj" on node 2 (Build target(s)).
        Project file contains ToolsVersion="14.0". This toolset is unknown or missing. You may be able to resolve this by installing the appropriate .NET Framework for this toolset. Treating the project as if it had ToolsVersion="4.0".
+=======
+﻿Build started 23/11/2015 11:59:49.
+     1>Project "C:\Users\James\Documents\Software.cpp\BookRepositoryProject\BookRepositoryProject\BookRepositoryProject.vcxproj" on node 2 (Build target(s)).
+>>>>>>> 0f9dda0aad40d65b092a25ce10c8f0802245c4d5
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt bookRepositoryMain.cpp
          bookRepositoryMain.cpp
        Link:
+<<<<<<< HEAD
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.lib" /MACHINE:X86 Debug\Admin.obj
          Debug\book.obj
          Debug\bookRepositoryMain.obj
@@ -18,7 +24,26 @@
      1>msvcprtd.lib(locale0_implib.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in Admin.obj
      1>C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.exe : fatal error LNK1169: one or more multiply defined symbols found
      1>Done Building Project "C:\Users\a00209091\Desktop\Software.cpp\BookRepositoryProject\BookRepositoryProject\BookRepositoryProject.vcxproj" (Build target(s)) -- FAILED.
+=======
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\James\Documents\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\James\Documents\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\James\Documents\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.lib" /MACHINE:X86 Debug\Admin.obj
+         Debug\AdminIterator.obj
+         Debug\book.obj
+         Debug\BookIterator.obj
+         Debug\bookRepositoryMain.obj
+         Debug\GuestIterator.obj
+         Debug\GuestUser.obj
+         Debug\login.obj
+         Debug\RegisteredUser.obj
+         Debug\RegUserIterator.obj
+         Debug\User.obj
+         BookRepositoryProject.vcxproj -> C:\Users\James\Documents\Software.cpp\BookRepositoryProject\Debug\BookRepositoryProject.exe
+     1>Done Building Project "C:\Users\James\Documents\Software.cpp\BookRepositoryProject\BookRepositoryProject\BookRepositoryProject.vcxproj" (Build target(s)).
+>>>>>>> 0f9dda0aad40d65b092a25ce10c8f0802245c4d5
 
-Build FAILED.
+Build succeeded.
 
+<<<<<<< HEAD
 Time Elapsed 00:00:01.95
+=======
+Time Elapsed 00:00:02.75
+>>>>>>> 0f9dda0aad40d65b092a25ce10c8f0802245c4d5
